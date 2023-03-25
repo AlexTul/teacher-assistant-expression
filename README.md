@@ -28,6 +28,8 @@ Requirements:<br>
 
 Solution:
 
+![](logo.png)
+
 ![](task.png)
 
 Project ideas:<br>
