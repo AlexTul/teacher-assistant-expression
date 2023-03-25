@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Message</title>
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+<!--Header-->
+<header th:insert="blocks/header :: header"></header>
+
+<!--Main layout-->
+<div style="text-align: center">
+    <p style="color: red" th:text="${message}"></p>
+</div>
+<br>
+<!--Main layout-->
+
+<!--LogIn-->
+<div class="row">
+    <div class="col-lg-5"></div>
+
+    <div class="col-lg-1"></div>
+
+    <div class="col-lg-1">
+        <!--LogIn link-->
+        <div id="register-link" class="text-right">
+            <a class="text-info" th:text="#{login}" href="/login"></a>
+        </div>
+        <!--LogIn link-->
+    </div>
+
+    <div class="col-lg-5"></div>
+</div>
+<br>
+<!--LogIn-->
+
+<!--Footer-->
+<header th:insert="blocks/footer :: footer"></header>
+
+</body>
+</html>

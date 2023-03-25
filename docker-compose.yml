@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+
+#  nix-final-marketplace:
+#    image: marketplace:1.0-SNAPSHOT
+#    build:
+#      context: .
+#    container_name: nix_final_marketplace
+
+#  marketplace-api:
+#    image: marketplaceapi:0.0.1-SNAPSHOT
+#    container_name: marketplaceapi-service
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/marketplace
+#      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USERNAME}
+#      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+#    depends_on:
+#      - db
+#    ports:
+#      - "8080:8080"
+
+#  assistant-web:
+#    image: assistantweb:0.0.1-SNAPSHOT
+#    container_name: assistantweb-service
+#    environment:
+#      SPRING_MAIL_USERNAME: ${POSTGRES_USERNAME}
+#      SPRING_MAIL_PASSWORD: ${POSTGRES_PASSWORD}
+#    depends_on:
+#      - db
+#    ports:
+#      - "8081:8081"
+
+  db:
+    image: postgres:latest
+    container_name: assistant_db
+    restart: always
+    environment:
+      POSTGRES_DB: assistant
+      POSTGRES_USER: ${POSTGRES_USERNAME}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  db_data:
+    driver: local

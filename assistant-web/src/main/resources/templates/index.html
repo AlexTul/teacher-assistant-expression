@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+<!--Header-->
+<header th:insert="blocks/header :: header"></header>
+
+<!--Main layout-->
+<div class="row" style="text-align: center">
+    <div class="col-lg-5"></div>
+
+    <div class="col-lg-2">
+        <form class="form-signing" method="post" action="/auth">
+            <h4 class="h3 mb-3 font-weight-normal" style="text-align: center" th:text="#{login.register}"></h4>
+
+            <label for="login" class="sr-only" th:text="#{form.login}"></label>
+            <input type="text" id="login" name="login" class="form-control"
+                   placeholder="email@gmail.com"
+                   minlength="2" maxlength="40" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" required>
+            <p style="color: red" th:text="${loginValidate}"></p>
+
+            <label for="password" class="sr-only" th:text="#{form.password}"></label>
+            <input type="password" id="password" name="password" class="form-control"
+                   placeholder="Password"
+                   minlength="10" maxlength="20" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=\S+$).{8,20}$" required>
+            <p style="color: red" th:text="${passwordValidate}"></p>
+
+            <!--Log In button-->
+            <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{login}"></button>
+            <!--Log In button-->
+        </form>
+    </div>
+
+    <div class="col-lg-5"></div>
+</div>
+<br>
+
+<!--Register-->
+<div class="row">
+    <div class="col-lg-5"></div>
+
+    <div class="col-lg-1"></div>
+
+    <div class="col-lg-1">
+        <!-- Register link -->
+        <div id="register-link" class="text-right">
+            <a class="text-info" th:text="#{register}" href="/register"></a>
+        </div>
+        <!-- Register link -->
+    </div>
+
+    <div class="col-lg-5"></div>
+</div>
+<br>
+<!--Register-->
+<!--Main layout-->
+
+<!--Footer-->
+<header th:insert="blocks/footer :: footer"></header>
+
+</body>
+</html>
