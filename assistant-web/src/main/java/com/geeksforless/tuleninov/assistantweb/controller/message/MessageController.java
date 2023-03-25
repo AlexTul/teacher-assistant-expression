@@ -3,6 +3,7 @@ package com.geeksforless.tuleninov.assistantweb.controller.message;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
  * @version 01
  */
 @Controller
+@RequestMapping("/message")
 public class MessageController {
 
     /**
@@ -20,7 +22,7 @@ public class MessageController {
      *
      * @return              index page
      */
-    @GetMapping("/message")
+    @GetMapping
     public String getRegisterPage(HttpServletRequest httpRequest, Model model) {
         model.addAttribute("message", httpRequest.getSession().getAttribute("message"));
 

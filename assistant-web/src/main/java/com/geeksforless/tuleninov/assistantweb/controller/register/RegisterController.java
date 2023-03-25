@@ -3,9 +3,7 @@ package com.geeksforless.tuleninov.assistantweb.controller.register;
 import com.geeksforless.tuleninov.assistantlib.data.user.SaveUserRequest;
 import com.geeksforless.tuleninov.assistantweb.service.user.UserService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,18 +41,16 @@ public class RegisterController {
      * @return goods page
      */
     @PostMapping("/register")
-    public String registeredPost(@ModelAttribute("user") @Valid SaveUserRequest request,
+    public String registeredPost(@Valid SaveUserRequest request,
                                  HttpServletRequest httpRequest) {
         boolean register = userService.register(request);
 
         if (!register) {
             httpRequest.getSession().setAttribute("message", "Email: " + request.email() + " is already taken");
-
             return "redirect:/message";
         }
 
         httpRequest.getSession().setAttribute("message", "Successful registration. Go to email page");
-
         return "redirect:/message";
     }
 }

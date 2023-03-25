@@ -3,6 +3,8 @@ package com.geeksforless.tuleninov.assistantweb.controller.login;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Controller for the email page.
  *
@@ -18,7 +20,8 @@ public class LoginController {
      * @return email page
      */
     @GetMapping("/login")
-    public String login() {
+    public String login(HttpServletRequest request) {
+        request.getSession().removeAttribute("message");
 
         return "index";
     }
