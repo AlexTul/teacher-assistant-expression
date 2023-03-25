@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static com.geeksforless.tuleninov.assistantlib.Routes.URL_MESSAGE;
+import static com.geeksforless.tuleninov.assistantweb.Constants.SCOPE_MESSAGE;
+
 /**
  * Controller for the message page.
  *
@@ -14,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
  * @version 01
  */
 @Controller
-@RequestMapping("/message")
+@RequestMapping(value = URL_MESSAGE)
 public class MessageController {
 
     /**
@@ -24,7 +27,7 @@ public class MessageController {
      */
     @GetMapping
     public String getRegisterPage(HttpServletRequest httpRequest, Model model) {
-        model.addAttribute("message", httpRequest.getSession().getAttribute("message"));
+        model.addAttribute(SCOPE_MESSAGE, httpRequest.getSession().getAttribute(SCOPE_MESSAGE));
 
         return "message/message";
     }

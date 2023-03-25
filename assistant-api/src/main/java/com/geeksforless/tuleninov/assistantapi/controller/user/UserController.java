@@ -16,6 +16,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.validation.Valid;
 
 import static com.geeksforless.tuleninov.assistantapi.exceptions.user.UserExceptions.userNotFound;
+import static com.geeksforless.tuleninov.assistantlib.Routes.*;
 
 /**
  * Rest controller for the User.
@@ -54,7 +55,7 @@ public class UserController {
      * @param pageable      abstract interface for pagination information
      * @return              all users from database in response format
      */
-    @GetMapping(value = "/admins/users", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = URL_ADMIN + URL_USER, produces = MediaType.APPLICATION_JSON_VALUE)
     @PageableAsQueryParam
     public Page<UserResponse> getAll(@Parameter(hidden = true) Pageable pageable) {
         return userCRUD.findAll(pageable);
@@ -66,7 +67,7 @@ public class UserController {
      * @param email         email of user
      * @return              the user from database in response format
      */
-    @GetMapping(value = "/admins/users/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = URL_ADMIN + URL_USER + "/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
     public UserResponse getCurrentUser(@PathVariable String email) {
         return userCRUD.findByEmail(email)
                 .orElseThrow(() -> userNotFound(email));
@@ -78,7 +79,7 @@ public class UserController {
      * @param id            id of user
      * @return              the user from database in response format
      */
-    @GetMapping(value = "/users/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = URL_USER + "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public UserResponse getUserById(@PathVariable int id) {
         return userCRUD.findById(id)
                 .orElseThrow(() -> userNotFound(id));
@@ -102,9 +103,21 @@ public class UserController {
      * @param request       request with user parameters
      */
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PutMapping(value = "/admins/users/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = URL_REGISTER + URL_USER + "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void update(@PathVariable int id, @Valid @RequestBody SaveUserRequest request) {
         userCRUD.update(id, request);
+    }
+
+    /**
+     * Change user`s password by email int the database.
+     *
+     * @param email       user`s login
+     * @param newPassword new user`s password
+     */
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PutMapping(value = URL_ADMIN + URL_USER + "/{email}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void changePasswordByEmail(@PathVariable String email, @Valid @RequestBody String newPassword) {
+        userCRUD.changePasswordByEmail(email, newPassword);
     }
 
     /**
@@ -113,7 +126,7 @@ public class UserController {
      * @param email         email of user
      */
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping(value = "/admins/users/{email}")
+    @DeleteMapping(value = URL_ADMIN + URL_USER + "/{email}")
     public void delete(@PathVariable String email) {
         userCRUD.deleteByEmail(email);
     }

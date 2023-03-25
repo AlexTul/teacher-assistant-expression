@@ -1,6 +1,7 @@
 package com.geeksforless.tuleninov.assistantweb.service.user;
 
 import com.geeksforless.tuleninov.assistantlib.data.user.SaveUserRequest;
+import com.geeksforless.tuleninov.assistantweb.data.user.OverrideUserPasswordRequest;
 import com.geeksforless.tuleninov.assistantweb.data.user.UserUIResponse;
 import com.geeksforless.tuleninov.assistantweb.feignclient.UserServiceFeignClient;
 import com.geeksforless.tuleninov.assistantweb.model.user.UserUI;
@@ -45,10 +46,10 @@ public class UserService {
 
         if (!Strings.isBlank(request.email())) {
             new Thread(() ->
-            mailSender.send(
-                    request.email(),
-                    "Successful registration",
-                    UserServiceMessagesMaker.makeWelcomeMessage(request))
+                    mailSender.send(
+                            request.email(),
+                            "Successful registration",
+                            UserServiceMessagesMaker.makeWelcomeMessage(request))
             ).start();
         }
         return true;
@@ -95,10 +96,38 @@ public class UserService {
         var userEmail = userServiceFeignClient.getUserById(id).email();
 
         userServiceFeignClient.update(id, request);
-        mailSender.send(
-                userEmail,
-                "Changing your data in Market Place",
-                UserServiceMessagesMaker.makeUpdateMessage(request));
+
+        new Thread(() ->
+                mailSender.send(
+                        userEmail,
+                        "Changing credentials",
+                        UserServiceMessagesMaker.makeUpdateMessage(request))
+        ).start();
+    }
+
+    /**
+     * Change user`s password by email int the database.
+     *
+     * @param email   user`s login
+     * @param request request with user`s password credentials
+     * @return true - if changing is successful
+     */
+    public boolean changePasswordByEmail(String email, OverrideUserPasswordRequest request) {
+        if(!request.newPassword().equals(request.confirmPassword())) {
+//            log.info("New password and confirmation password do not match");
+            return false;
+        }
+
+        userServiceFeignClient.changePasswordByEmail(email, request.newPassword());
+
+        new Thread(() ->
+                mailSender.send(
+                        email,
+                        "Changing credentials",
+                        UserServiceMessagesMaker.makeUpdatePasswordMessage(email, request.newPassword()))
+        ).start();
+
+        return true;
     }
 
     /**
@@ -112,10 +141,13 @@ public class UserService {
         for (var variable : userUI.getRoles()) {
             if (!variable.getName().equals("ROLE_ADMIN")) {
                 userServiceFeignClient.delete(email);
-                mailSender.send(
-                        userUI.getEmail(),
-                        "Deleting your profile in Market Place",
-                        UserServiceMessagesMaker.makeDeleteMessage());
+
+                new Thread(() ->
+                        mailSender.send(
+                                userUI.getEmail(),
+                                "Deleting profile",
+                                UserServiceMessagesMaker.makeDeleteMessage(userUI.getEmail()))
+                ).start();
             }
         }
     }

@@ -1,13 +1,10 @@
-/*
- * Copyright (c) 2022
- * For NIX Solutions
- */
 package com.geeksforless.tuleninov.assistantweb.controller.action;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+
+import static com.geeksforless.tuleninov.assistantlib.Routes.URL_ACTION;
 
 /**
  * Controller for the admin page.
@@ -16,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @version 01
  */
 @Controller
-@RequestMapping("/action")
+@RequestMapping(value = URL_ACTION)
 public class ActionController {
 
     /**
@@ -26,7 +23,6 @@ public class ActionController {
      */
     @GetMapping
     public String actionPage() {
-        System.out.println();
 
         return "action/action";
     }

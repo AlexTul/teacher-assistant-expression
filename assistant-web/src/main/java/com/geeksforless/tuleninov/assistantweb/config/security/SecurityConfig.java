@@ -11,6 +11,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import static com.geeksforless.tuleninov.assistantlib.Routes.*;
+import static com.geeksforless.tuleninov.assistantweb.Constants.SCOPE_EMAIL;
+import static com.geeksforless.tuleninov.assistantweb.Constants.SCOPE_PASSWORD;
+
 /**
  * Override some of Spring's built-in security protocols to use our database and hashing algorithm.
  *
@@ -33,24 +37,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/register", "/message").permitAll()
+                .antMatchers(URL_INDEX, URL_REGISTER, URL_MESSAGE).permitAll()
                 .antMatchers("/static/**", "/css/**", "/images/**").permitAll()
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/action/**").hasRole("USER")
+                .antMatchers(URL_ADMIN + "/**").hasRole("ADMIN")
+                .antMatchers(URL_ACTION + "/**").hasRole("USER")
                 .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login")
+                .loginPage(URL_LOGIN)
                 .permitAll()
-                .failureUrl("/login?error=true")
+                .failureUrl(URL_LOGIN + "?error=true")
                 .successHandler(successHandler)
-                .usernameParameter("email")
-                .passwordParameter("password")
+                .usernameParameter(SCOPE_EMAIL)
+                .passwordParameter(SCOPE_PASSWORD)
                 .and()
                 .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/login")
+                .logoutRequestMatcher(new AntPathRequestMatcher(URL_LOGOUT))
+                .logoutSuccessUrl(URL_LOGIN)
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
                 .and()

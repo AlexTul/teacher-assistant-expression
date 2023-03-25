@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Set;
 
+import static com.geeksforless.tuleninov.assistantlib.Routes.*;
+
 @Configuration
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
@@ -20,12 +22,12 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
 
         if (roles.contains("ROLE_ADMIN")) {
-            response.sendRedirect("/admin");
+            response.sendRedirect(URL_ADMIN);
         } else if (roles.contains("ROLE_USER")) {
-            response.sendRedirect("/action");
+            response.sendRedirect(URL_ACTION);
         }
         else {
-            response.sendRedirect("/login");
+            response.sendRedirect(URL_LOGIN);
         }
     }
 }

@@ -8,6 +8,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import static com.geeksforless.tuleninov.assistantlib.Routes.*;
+
 /**
  * Feign Client for the User.
  *
@@ -32,7 +34,7 @@ public interface UserServiceFeignClient {
      * @param pageable abstract interface for pagination information
      * @return all users from database in response format
      */
-    @GetMapping(value = "/admins/users", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = URL_ADMIN + URL_USER, produces = MediaType.APPLICATION_JSON_VALUE)
     Page<UserUIResponse> getAll(Pageable pageable);
 
     /**
@@ -41,7 +43,7 @@ public interface UserServiceFeignClient {
      * @param email email of user
      * @return the user from database in response format
      */
-    @GetMapping(value = "/admins/users/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = URL_ADMIN + URL_USER + "/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
     UserUIResponse getCurrentUser(@PathVariable String email);
 
     /**
@@ -50,7 +52,7 @@ public interface UserServiceFeignClient {
      * @param id id of user
      * @return the user from database in response format
      */
-    @GetMapping(value = "/users/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = URL_USER + "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     UserUIResponse getUserById(@PathVariable int id);
 
     /**
@@ -68,14 +70,23 @@ public interface UserServiceFeignClient {
      * @param id      id of goods
      * @param request request with user parameters
      */
-    @PutMapping(value = "/admins/users/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = URL_REGISTER + URL_USER + "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     void update(@PathVariable int id, @RequestBody SaveUserRequest request);
+
+    /**
+     * Change user`s password by email int the database.
+     *
+     * @param email       user`s login
+     * @param newPassword new user`s password
+     */
+    @PutMapping(value = URL_ADMIN + URL_USER + "/{email}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    void changePasswordByEmail(@PathVariable String email, @RequestBody String newPassword);
 
     /**
      * Delete the user in the database.
      *
      * @param email email of user
      */
-    @DeleteMapping(value = "/admins/users/{email}")
+    @DeleteMapping(value = URL_ADMIN + URL_USER + "/{email}")
     void delete(@PathVariable String email);
 }

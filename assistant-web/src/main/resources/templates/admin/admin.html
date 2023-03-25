@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login</title>
+    <title>Admin</title>
 
     <link rel="stylesheet" href="/css/bootstrap.min.css">
 </head>
@@ -22,33 +22,33 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-4 pt-3">
-                    <div class="card" style="background-color:white;">
+                    <div class="card" style="background-color:white">
                         <div class="card-body">
                             <h4 class="card-title" th:text="#{report}"></h4>
                             <p class="card-text" th:text="#{manage.section}"></p>
-                            <form th:method="get" th:action="@{/login}">
+                            <form th:method="get" th:action="@{/report}">
                                 <button type="submit" class="btn btn-primary" th:text="#{manage}"></button>
                             </form>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 pt-3">
-                    <div class="card" style="background-color:white;">
+                    <div class="card" style="background-color:white">
                         <div class="card-body">
                             <h4 class="card-title" th:text="#{users}"></h4>
                             <p class="card-text" th:text="#{manage.section}"></p>
-                            <form th:method="get" th:action="@{/login}">
+                            <form th:method="get" th:action="@{/admin/user}">
                                 <button type="submit" class="btn btn-primary" th:text="#{manage}"></button>
                             </form>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 pt-3">
-                    <div class="card" style="background-color:white;">
+                    <div class="card" style="background-color:white">
                         <div class="card-body">
                             <h4 class="card-title" th:text="#{profile}"></h4>
                             <p class="card-text" th:text="#{manage.section}"></p>
-                            <form th:method="get" th:action="@{/login}">
+                            <form th:method="get" th:action="@{/profile}">
                                 <button type="submit" class="btn btn-primary" th:text="#{manage}"></button>
                             </form>
                         </div>

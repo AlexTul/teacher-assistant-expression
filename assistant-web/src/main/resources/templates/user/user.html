@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Users</title>
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+<!--Header-->
+<header th:insert="blocks/header :: header"></header>
+
+<!--Main layout-->
+<!-- Table of users -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="tab-pane fade show active" id="users" role="tabpanel"
+             aria-labelledby="internet-tab">
+            <h3 style="text-align: center" th:text="#{users}"></h3>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col" th:text="#{first.name}"></th>
+                    <th scope="col" th:text="#{last.name}"></th>
+                    <th scope="col" th:text="#{email}"></th>
+                    <th scope="col" th:text="#{role}"></th>
+                    <th scope="col" th:text="#{edit}"></th>
+                    <th scope="col" th:text="#{delete}"></th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="user, iStat : ${users}">
+                    <td th:text="${user.id}">Larry</td>
+                    <td th:text="${user.firstName}">Larry</td>
+                    <td th:text="${user.lastName}">Larry</td>
+                    <td th:text="${user.email}">Larry</td>
+                    <td th:text="${user.roleName}">Larry</td>
+                    <td>
+                        <a class="btn btn-warning btn-lg" href="" th:href="@{/admin/user/{email}(email=${user.email})}"
+                           role="button"></a>
+                    </td>
+                    <td>
+                        <form th:method="delete" th:action="@{/admin/user/{email}(email=${user.email})}">
+                            <button type="submit" class="btn btn-danger btn-lg"></button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- Table of users -->
+<!--Main layout-->
+
+<!--Footer-->
+<header th:insert="blocks/footer :: footer"></header>
+
+</body>
+</html>

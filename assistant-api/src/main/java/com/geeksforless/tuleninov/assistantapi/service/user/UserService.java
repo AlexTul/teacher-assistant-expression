@@ -42,8 +42,8 @@ public class UserService implements UserCRUD {
     /**
      * Create the user in the database.
      *
-     * @param request       request with user parameters
-     * @return              the user from database in response format
+     * @param request request with user parameters
+     * @return the user from database in response format
      */
     @Override
     @Transactional
@@ -55,8 +55,8 @@ public class UserService implements UserCRUD {
     /**
      * Find all users from database in response format with pagination information.
      *
-     * @param pageable      abstract interface for pagination information
-     * @return              all users from database in response format
+     * @param pageable abstract interface for pagination information
+     * @return all users from database in response format
      */
     @Override
     @Transactional(readOnly = true)
@@ -68,8 +68,8 @@ public class UserService implements UserCRUD {
     /**
      * Find the user by email from the database in response format.
      *
-     * @param email         email of user
-     * @return              the user from database in response format
+     * @param email email of user
+     * @return the user from database in response format
      */
     @Override
     @Transactional(readOnly = true)
@@ -81,8 +81,8 @@ public class UserService implements UserCRUD {
     /**
      * Find the user by id from the database in response format.
      *
-     * @param id            id of user
-     * @return              the user from database in response format
+     * @param id id of user
+     * @return the user from database in response format
      */
     @Override
     @Transactional(readOnly = true)
@@ -94,8 +94,8 @@ public class UserService implements UserCRUD {
     /**
      * Exists user by email in the database in boolean format.
      *
-     * @param email         email of user
-     * @return              true - if user exists in database and false - is user does not exist in database
+     * @param email email of user
+     * @return true - if user exists in database and false - is user does not exist in database
      */
     @Override
     @Transactional(readOnly = true)
@@ -106,8 +106,8 @@ public class UserService implements UserCRUD {
     /**
      * Update the user in the database.
      *
-     * @param id            id of goods
-     * @param request       request with user parameters
+     * @param id      id of goods
+     * @param request request with user parameters
      */
     @Override
     @Transactional
@@ -117,13 +117,29 @@ public class UserService implements UserCRUD {
 
         user.setFirstName(request.firstName());
         user.setLastName(request.lastName());
+        user.setEmail(request.email());
         user.setPassword(passwordEncoder.encode(request.password()));
+    }
+
+    /**
+     * Change user`s password by email int the database.
+     *
+     * @param email       user`s login
+     * @param newPassword new user`s password
+     */
+    @Override
+    @Transactional
+    public void changePasswordByEmail(String email, String newPassword) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> userNotFound(email));
+
+        user.setPassword(passwordEncoder.encode(newPassword));
     }
 
     /**
      * Delete the user in the database.
      *
-     * @param email         email of user
+     * @param email email of user
      */
     @Override
     @Transactional
@@ -137,7 +153,7 @@ public class UserService implements UserCRUD {
     /**
      * Validate the user`s name field in the database.
      *
-     * @param request       request with user parameters
+     * @param request request with user parameters
      */
     private void validateUniqueFields(SaveUserRequest request) {
         String email = request.email();
@@ -149,8 +165,8 @@ public class UserService implements UserCRUD {
     /**
      * Save the user in the database.
      *
-     * @param request       request with user parameters
-     * @return              the user entity
+     * @param request request with user parameters
+     * @return the user entity
      */
     private User save(SaveUserRequest request) {
         var user = new User();
