@@ -1,7 +1,6 @@
 package com.geeksforless.tuleninov.assistantapi.controller.user;
 
 import com.geeksforless.tuleninov.assistantapi.data.user.UserResponse;
-import com.geeksforless.tuleninov.assistantapi.model.role.Role;
 import com.geeksforless.tuleninov.assistantapi.service.user.UserCRUD;
 import com.geeksforless.tuleninov.assistantlib.data.user.SaveUserRequest;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -42,11 +41,11 @@ public class UserController {
      * @return              the user from database in response format
      */
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(value = "/register", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = URL_REGISTER, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserResponse> register(@Valid @RequestBody SaveUserRequest request, UriComponentsBuilder ucb) {
         UserResponse response = userCRUD.create(request);
         return ResponseEntity
-                .created(ucb.path("/register/{id}").build(response.id()))
+                .created(ucb.path(URL_REGISTER + "/{id}").build(response.id()))
                 .body(response);
     }
 

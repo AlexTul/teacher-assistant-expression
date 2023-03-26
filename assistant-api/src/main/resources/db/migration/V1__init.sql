@@ -21,6 +21,24 @@ create table user_role
     role_id bigserial not null references roles (id)
 );
 
+create table expressions
+(
+    id bigserial not null primary key,
+    expression text not null unique
+);
+
+create table roots
+(
+    id bigserial not null primary key,
+    value decimal not null unique
+);
+
+create table expression_root
+(
+    expression_id bigserial not null references expressions (id),
+    root_id bigserial not null references roots (id)
+);
+
 -- FILL TABLES WITH DEV DATA --
 
 insert into roles (id, name)

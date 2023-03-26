@@ -1,4 +1,4 @@
-package com.geeksforless.tuleninov.assistantweb.service.user;
+package com.geeksforless.tuleninov.assistantweb.service.crud.user;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;

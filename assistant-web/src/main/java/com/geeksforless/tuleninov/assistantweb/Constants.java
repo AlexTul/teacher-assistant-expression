@@ -14,6 +14,7 @@ public final class Constants {
     public static final String SCOPE_PASSWORD = "password";
     public static final String SCOPE_MESSAGE = "message";
     public static final String SCOPE_USER = "user";
+    public static final String SCOPE_EXPRESSION = "expression";
     // endregion scope
 
 

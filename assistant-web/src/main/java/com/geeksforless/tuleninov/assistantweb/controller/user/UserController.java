@@ -2,7 +2,7 @@ package com.geeksforless.tuleninov.assistantweb.controller.user;
 
 import com.geeksforless.tuleninov.assistantweb.config.pagination.PaginationConfig;
 import com.geeksforless.tuleninov.assistantweb.data.user.OverrideUserPasswordRequest;
-import com.geeksforless.tuleninov.assistantweb.service.user.UserService;
+import com.geeksforless.tuleninov.assistantweb.service.crud.user.UserService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

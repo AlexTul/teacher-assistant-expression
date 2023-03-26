@@ -28,6 +28,7 @@ public class MessageController {
     @GetMapping
     public String getRegisterPage(HttpServletRequest httpRequest, Model model) {
         model.addAttribute(SCOPE_MESSAGE, httpRequest.getSession().getAttribute(SCOPE_MESSAGE));
+        httpRequest.getSession().removeAttribute(SCOPE_MESSAGE);
 
         return "message/message";
     }

@@ -1,13 +1,11 @@
-package com.geeksforless.tuleninov.assistantweb.service.user;
+package com.geeksforless.tuleninov.assistantweb.service.crud.user;
 
 import com.geeksforless.tuleninov.assistantlib.data.user.SaveUserRequest;
 import com.geeksforless.tuleninov.assistantweb.data.user.OverrideUserPasswordRequest;
 import com.geeksforless.tuleninov.assistantweb.data.user.UserUIResponse;
 import com.geeksforless.tuleninov.assistantweb.feignclient.UserServiceFeignClient;
-import com.geeksforless.tuleninov.assistantweb.model.role.RoleUI;
 import com.geeksforless.tuleninov.assistantweb.model.user.UserUI;
 import org.apache.logging.log4j.util.Strings;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -20,9 +18,6 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserService {
-
-    @Value("${services.assistant.messages}")
-    private String messages;
 
     private final UserServiceFeignClient userServiceFeignClient;
     private final MailSender mailSender;
@@ -75,16 +70,6 @@ public class UserService {
     public UserUI findByEmail(String email) {
         return UserUI.fromUserResponse(
                 userServiceFeignClient.getCurrentUser(email));
-    }
-
-    /**
-     * Exists user by email in the database in boolean format.
-     *
-     * @param email email of user
-     * @return true - if user exists in database and false - is user does not exist in database
-     */
-    public boolean existsByEmail(String email) {
-        return userServiceFeignClient.existsByEmail(email);
     }
 
     /**

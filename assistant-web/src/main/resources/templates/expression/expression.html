@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Expression</title>
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+<!--Header-->
+<header th:insert="blocks/header :: header"></header>
+
+<!--Main layout-->
+<!--Error message-->
+<div style="text-align: center">
+    <p style="color: red" th:text="${message}"></p>
+</div>
+<br>
+<!--Error message-->
+
+<div class="row" style="text-align: center">
+    <div class="col-lg-5"></div>
+
+    <div class="col-lg-2">
+        <form class="form-signing" th:method="post" th:action="@{/expression}" th:object="${expression}">
+            <h4 class="h3 mb-3 font-weight-normal" style="text-align: center" th:text="#{expression.save}"></h4>
+
+            <label for="expression" class="sr-only" th:text="#{form.expression}"></label>
+            <input type="text" id="expression" name="expression" class="form-control"
+                   placeholder="a*x+b=c"
+                   minlength="3" required>
+            <p style="color: red" th:text="${expressionValidate}"></p>
+
+            <!--Log In button-->
+            <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{save}"></button>
+            <!--Log In button-->
+        </form>
+    </div>
+
+    <div class="col-lg-5"></div>
+</div>
+<br>
+<!--Main layout-->
+
+<!--Footer-->
+<header th:insert="blocks/footer :: footer"></header>
+
+</body>
+</html>

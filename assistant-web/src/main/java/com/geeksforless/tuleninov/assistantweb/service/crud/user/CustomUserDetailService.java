@@ -1,4 +1,4 @@
-package com.geeksforless.tuleninov.assistantweb.service.user;
+package com.geeksforless.tuleninov.assistantweb.service.crud.user;
 
 import com.geeksforless.tuleninov.assistantweb.model.user.CustomUserDetail;
 import org.springframework.security.core.userdetails.UserDetails;

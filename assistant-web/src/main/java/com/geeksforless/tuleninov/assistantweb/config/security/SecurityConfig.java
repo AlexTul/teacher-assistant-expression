@@ -1,6 +1,6 @@
 package com.geeksforless.tuleninov.assistantweb.config.security;
 
-import com.geeksforless.tuleninov.assistantweb.service.user.CustomUserDetailService;
+import com.geeksforless.tuleninov.assistantweb.service.crud.user.CustomUserDetailService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

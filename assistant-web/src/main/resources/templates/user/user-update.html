@@ -21,13 +21,13 @@
         <form class="form-signing" th:method="put" th:action="@{/admin/user/{email}(email=${user.email})}" th:object="${user}">
             <label for="newPassword" class="sr-only" th:text="#{form.password.new}"></label>
             <input type="password" id="newPassword" name="newPassword" class="form-control"
-                   placeholder="Password"
+                   placeholder="New password"
                    minlength="10" maxlength="20" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=\S+$).{8,20}$" required>
             <p style="color: red" th:text="${passwordValidate}"></p>
 
             <label for="confirmPassword" class="sr-only" th:text="#{form.password.confirm}"></label>
             <input type="password" id="confirmPassword" name="confirmPassword" class="form-control"
-                   placeholder="Password"
+                   placeholder="Confirm password"
                    minlength="10" maxlength="20" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=\S+$).{8,20}$" required>
             <p style="color: red" th:text="${confirmPasswordValidate}"></p>
             <p style="color: red" th:text="${passwordConfirming}"></p>

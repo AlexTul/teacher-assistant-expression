@@ -2,7 +2,6 @@ package com.geeksforless.tuleninov.assistantweb.feignclient;
 
 import com.geeksforless.tuleninov.assistantlib.data.user.SaveUserRequest;
 import com.geeksforless.tuleninov.assistantweb.data.user.UserUIResponse;
-import com.geeksforless.tuleninov.assistantweb.model.role.RoleUI;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,7 +25,7 @@ public interface UserServiceFeignClient {
      * @param request request with user parameters
      * @return the user from database in response format
      */
-    @PostMapping(value = "/register", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = URL_REGISTER, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     UserUIResponse register(@RequestBody SaveUserRequest request);
 
     /**

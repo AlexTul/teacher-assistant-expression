@@ -19,6 +19,7 @@ public final class Routes {
     public static final String URL_REPORT = "/report";
     public static final String URL_USER = "/user";
     public static final String URL_PROFILE = "/profile";
+    public static final String URL_EXPRESSION = "/expression";
 
 
 }

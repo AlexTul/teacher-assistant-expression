@@ -1,7 +1,7 @@
 package com.geeksforless.tuleninov.assistantweb.controller.register;
 
 import com.geeksforless.tuleninov.assistantlib.data.user.SaveUserRequest;
-import com.geeksforless.tuleninov.assistantweb.service.user.UserService;
+import com.geeksforless.tuleninov.assistantweb.service.crud.user.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
