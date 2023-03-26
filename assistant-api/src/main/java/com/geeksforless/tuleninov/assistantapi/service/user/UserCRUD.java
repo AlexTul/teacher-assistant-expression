@@ -1,21 +1,12 @@
 package com.geeksforless.tuleninov.assistantapi.service.user;
 
 import com.geeksforless.tuleninov.assistantapi.data.user.UserResponse;
+import com.geeksforless.tuleninov.assistantapi.model.role.Role;
 import com.geeksforless.tuleninov.assistantlib.data.user.SaveUserRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
-import javax.validation.Valid;
 import java.util.Optional;
-
-import static com.geeksforless.tuleninov.assistantlib.Routes.URL_ADMIN;
-import static com.geeksforless.tuleninov.assistantlib.Routes.URL_USER;
 
 /**
  * Interface CRUD for User.
@@ -34,12 +25,12 @@ public interface UserCRUD {
     UserResponse create(SaveUserRequest request);
 
     /**
-     * Find all users from database in response format with pagination information.
+     * Find all users from the database in response format with ROLE_USER and pagination information.
      *
      * @param pageable abstract interface for pagination information
-     * @return all users from database in response format
+     * @return all users from the database with ROLE_USER in response format
      */
-    Page<UserResponse> findAll(Pageable pageable);
+    Page<UserResponse> findAllByRolesEquals(Pageable pageable);
 
     /**
      * Find the user by email from the database in response format.

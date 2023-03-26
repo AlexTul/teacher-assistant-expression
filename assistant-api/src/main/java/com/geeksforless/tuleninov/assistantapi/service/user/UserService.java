@@ -53,15 +53,18 @@ public class UserService implements UserCRUD {
     }
 
     /**
-     * Find all users from database in response format with pagination information.
+     * Find all users from the database in response format with ROLE_USER and pagination information.
      *
      * @param pageable abstract interface for pagination information
      * @return all users from database in response format
      */
     @Override
     @Transactional(readOnly = true)
-    public Page<UserResponse> findAll(Pageable pageable) {
-        return userRepository.findAll(pageable)
+    public Page<UserResponse> findAllByRolesEquals(Pageable pageable) {
+        Role role = roleRepository.findById(1)
+                .orElseThrow(() -> roleNotFound(1));
+
+        return userRepository.findAllByRolesEquals(pageable, role)
                 .map(UserResponse::fromUser);
     }
 

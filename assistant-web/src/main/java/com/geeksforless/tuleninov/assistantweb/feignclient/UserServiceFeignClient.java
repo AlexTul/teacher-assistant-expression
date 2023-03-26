@@ -2,6 +2,7 @@ package com.geeksforless.tuleninov.assistantweb.feignclient;
 
 import com.geeksforless.tuleninov.assistantlib.data.user.SaveUserRequest;
 import com.geeksforless.tuleninov.assistantweb.data.user.UserUIResponse;
+import com.geeksforless.tuleninov.assistantweb.model.role.RoleUI;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -35,7 +36,7 @@ public interface UserServiceFeignClient {
      * @return all users from database in response format
      */
     @GetMapping(value = URL_ADMIN + URL_USER, produces = MediaType.APPLICATION_JSON_VALUE)
-    Page<UserUIResponse> getAll(Pageable pageable);
+    Page<UserUIResponse> getAllByRolesEquals(Pageable pageable);
 
     /**
      * Get the user by email from the database in response format.

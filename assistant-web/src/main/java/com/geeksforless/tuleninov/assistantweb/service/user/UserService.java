@@ -4,14 +4,13 @@ import com.geeksforless.tuleninov.assistantlib.data.user.SaveUserRequest;
 import com.geeksforless.tuleninov.assistantweb.data.user.OverrideUserPasswordRequest;
 import com.geeksforless.tuleninov.assistantweb.data.user.UserUIResponse;
 import com.geeksforless.tuleninov.assistantweb.feignclient.UserServiceFeignClient;
+import com.geeksforless.tuleninov.assistantweb.model.role.RoleUI;
 import com.geeksforless.tuleninov.assistantweb.model.user.UserUI;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.Comparator;
-import java.util.List;
 
 /**
  * Service class for User.
@@ -63,11 +62,8 @@ public class UserService {
      * @param pageable abstract interface for pagination information
      * @return all users from database in response format
      */
-    public List<UserUIResponse> findAll(Pageable pageable) {
-        return userServiceFeignClient.getAll(pageable).stream()
-                .filter(user -> user.roleName().equals("ROLE_USER"))
-                .sorted(Comparator.comparingInt(UserUIResponse::id))
-                .toList();
+    public Page<UserUIResponse> findAllByRolesEquals(Pageable pageable) {
+        return userServiceFeignClient.getAllByRolesEquals(pageable);
     }
 
     /**

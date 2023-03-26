@@ -2,7 +2,6 @@ package com.geeksforless.tuleninov.assistantweb.controller.user;
 
 import com.geeksforless.tuleninov.assistantweb.config.pagination.PaginationConfig;
 import com.geeksforless.tuleninov.assistantweb.data.user.OverrideUserPasswordRequest;
-import com.geeksforless.tuleninov.assistantweb.data.user.UserUIResponse;
 import com.geeksforless.tuleninov.assistantweb.service.user.UserService;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -11,8 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-
-import java.util.Comparator;
 
 import static com.geeksforless.tuleninov.assistantlib.Routes.URL_ADMIN;
 import static com.geeksforless.tuleninov.assistantlib.Routes.URL_USER;
@@ -44,7 +41,7 @@ public class UserController {
     public String getUsersPage(HttpServletRequest request,
                                Model model) {
         var config = PaginationConfig.config(request);
-        var usersUI = userService.findAll(PageRequest.of(config.page(), config.size()));
+        var usersUI = userService.findAllByRolesEquals(PageRequest.of(config.page(), config.size()));
 
         model.addAttribute("users", usersUI);
 

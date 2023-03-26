@@ -1,11 +1,13 @@
 package com.geeksforless.tuleninov.assistantapi.repository;
 
+import com.geeksforless.tuleninov.assistantapi.model.role.Role;
 import com.geeksforless.tuleninov.assistantapi.model.user.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -15,6 +17,8 @@ import java.util.Optional;
  * @version 01
  */
 public interface UserRepository extends JpaRepository<User, Integer> {
+
+    Page<User> findAllByRolesEquals(Pageable pageable, Role role);
 
     boolean existsByEmail(String email);
 

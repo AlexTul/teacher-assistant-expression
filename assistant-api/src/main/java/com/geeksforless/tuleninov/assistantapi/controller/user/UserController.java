@@ -1,6 +1,7 @@
 package com.geeksforless.tuleninov.assistantapi.controller.user;
 
 import com.geeksforless.tuleninov.assistantapi.data.user.UserResponse;
+import com.geeksforless.tuleninov.assistantapi.model.role.Role;
 import com.geeksforless.tuleninov.assistantapi.service.user.UserCRUD;
 import com.geeksforless.tuleninov.assistantlib.data.user.SaveUserRequest;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -50,15 +51,15 @@ public class UserController {
     }
 
     /**
-     * Get all users from database in response format with pagination information.
+     * Get all users from database in response format with ROLE_USER and pagination information.
      *
      * @param pageable      abstract interface for pagination information
      * @return              all users from database in response format
      */
     @GetMapping(value = URL_ADMIN + URL_USER, produces = MediaType.APPLICATION_JSON_VALUE)
     @PageableAsQueryParam
-    public Page<UserResponse> getAll(@Parameter(hidden = true) Pageable pageable) {
-        return userCRUD.findAll(pageable);
+    public Page<UserResponse> getAllByRolesEquals(@Parameter(hidden = true) Pageable pageable) {
+        return userCRUD.findAllByRolesEquals(pageable);
     }
 
     /**
