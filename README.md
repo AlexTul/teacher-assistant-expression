@@ -39,5 +39,5 @@ Admin credentials:<br>
 ●	login: admin@gmail.com<br>
 ●	password: QAsQaqGMoG1K5hQCCVFd
 
-To see available REST API endpoints, go to [http://localhost:8080/swagger-ui/index.html]()
+To see available REST API endpoints, go to [http://localhost:8080/swagger-ui/index.html]()<br>
 To see an application, go to [http://localhost:8081]()
