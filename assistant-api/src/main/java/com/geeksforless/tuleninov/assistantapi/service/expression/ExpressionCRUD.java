@@ -30,7 +30,7 @@ public interface ExpressionCRUD {
     Page<ExpressionResponse> findAll(Pageable pageable);
 
     /**
-     * Exists expression in the database.
+     * Checking for the existence of an expression in the database.
      *
      * @param expression expression from user
      * @return true - if expression exists in the database and false - is expression does not exist in the database

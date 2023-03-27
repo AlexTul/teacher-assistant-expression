@@ -2,8 +2,10 @@ package com.geeksforless.tuleninov.assistantapi.data.expression;
 
 import com.geeksforless.tuleninov.assistantapi.model.expression.Expression;
 
+import java.math.BigDecimal;
+
 /**
- * Record for the expression response.
+ * Record for the Expression response.
  *
  * @author Oleksandr Tuleninov
  * @version 01
@@ -11,12 +13,13 @@ import com.geeksforless.tuleninov.assistantapi.model.expression.Expression;
 public record ExpressionResponse(
 
         long id,
-        String expression
+        String expression,
+        double root
 
 ) {
 
     /**
-     * Create the new record from User.
+     * Create the new record from Expression.
      *
      * @param expression expression
      * @return new record from ExpressionResponse
@@ -24,7 +27,8 @@ public record ExpressionResponse(
     public static ExpressionResponse fromExpression(Expression expression) {
         return new ExpressionResponse(
                 expression.getId(),
-                expression.getExpression()
+                expression.getExpression(),
+                expression.getRoot()
         );
     }
 }

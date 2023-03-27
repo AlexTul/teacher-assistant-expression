@@ -43,7 +43,7 @@ public class ExpressionService implements ExpressionCRUD {
     }
 
     /**
-     * Exists expression in the database.
+     * Checking for the existence of an expression in the database.
      *
      * @param expression expression from user
      * @return true - if expression exists in the database and false - is expression does not exist in the database
@@ -84,6 +84,7 @@ public class ExpressionService implements ExpressionCRUD {
     private Expression save(SaveExpressionRequest request) {
         var expression = new Expression();
         expression.setExpression(request.expression());
+        expression.setRoot(request.root());
         expressionRepository.save(expression);
 
         return expression;

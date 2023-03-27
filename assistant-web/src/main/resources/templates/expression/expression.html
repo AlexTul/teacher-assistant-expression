@@ -32,7 +32,12 @@
             <input type="text" id="expression" name="expression" class="form-control"
                    placeholder="a*x+b=c"
                    minlength="3" required>
-            <p style="color: red" th:text="${expressionValidate}"></p>
+
+            <label for="root" class="sr-only" th:text="#{form.root}"></label>
+            <input type="text" id="root" name="root" class="form-control"
+                   placeholder="0.0"
+                   minlength="1" required>
+            <br>
 
             <!--Log In button-->
             <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{save}"></button>

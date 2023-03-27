@@ -24,10 +24,7 @@
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col" th:text="#{expression}"></th>
-                    <th scope="col" th:text="#{delete}"></th>
-                    <th scope="col">ID</th>
-                    <th scope="col" th:text="#{roots}"></th>
-                    <th scope="col" th:text="#{edit}"></th>
+                    <th scope="col" th:text="#{root}"></th>
                     <th scope="col" th:text="#{delete}"></th>
                 </tr>
                 </thead>
@@ -36,26 +33,13 @@
                 <tr th:each="expression, iStat : ${expressions}">
                     <td th:text="${expression.id}">Larry</td>
                     <td th:text="${expression.expression}">Larry</td>
+                    <td th:text="${expression.root}">Larry</td>
                     <td>
                         <form th:method="delete" th:action="@{/expression/{id}(id=${expression.id})}">
                             <button type="submit" class="btn btn-danger btn-lg"></button>
                         </form>
                     </td>
                 </tr>
-<!--                <tr th:each="root, iStat : ${allRoots}">-->
-<!--                    <td th:text="${root.id}">Larry</td>-->
-<!--                    <td th:text="${root.value}">Larry</td>-->
-<!--                    <td>-->
-<!--                        <a class="btn btn-warning btn-lg" href="" th:href="@{/root/{id}(id=${root.id})}"-->
-<!--                           role="button"></a>-->
-<!--                    </td>-->
-<!--                    <td>-->
-<!--                        <form th:method="delete" th:action="@{/root/{id}(id=${root.id})}">-->
-<!--                            <button type="submit" class="btn btn-danger btn-lg"></button>-->
-<!--                        </form>-->
-<!--                    </td>-->
-<!--                </tr>-->
-
                 </tbody>
             </table>
 

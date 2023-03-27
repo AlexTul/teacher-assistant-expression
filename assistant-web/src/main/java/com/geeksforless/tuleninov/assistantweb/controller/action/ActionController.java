@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 
 import static com.geeksforless.tuleninov.assistantlib.Routes.URL_ACTION;
-import static com.geeksforless.tuleninov.assistantlib.Routes.URL_EXPRESSION;
 import static com.geeksforless.tuleninov.assistantweb.Constants.SCOPE_EXPRESSIONS;
 
 /**
@@ -44,6 +43,4 @@ public class ActionController {
 
         return "action/action";
     }
-
-
 }

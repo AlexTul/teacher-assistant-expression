@@ -1,6 +1,10 @@
 package com.geeksforless.tuleninov.assistantapi.model.expression;
 
+import com.geeksforless.tuleninov.assistantapi.model.root.Root;
+
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Objects;
 
 /**
  * Class for Expression entity.
@@ -19,6 +23,8 @@ public class Expression {
     @Column(nullable = false, unique = true)
     private String expression;
 
+    private double root;
+
     public Expression() {
     }
 
@@ -36,5 +42,26 @@ public class Expression {
 
     public void setExpression(String expression) {
         this.expression = expression;
+    }
+
+    public double getRoot() {
+        return root;
+    }
+
+    public void setRoot(double root) {
+        this.root = root;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Expression that = (Expression) o;
+        return Objects.equals(expression, that.expression);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(expression);
     }
 }

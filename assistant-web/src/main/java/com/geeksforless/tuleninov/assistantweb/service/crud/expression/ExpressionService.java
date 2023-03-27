@@ -3,7 +3,6 @@ package com.geeksforless.tuleninov.assistantweb.service.crud.expression;
 import com.geeksforless.tuleninov.assistantlib.data.expression.SaveExpressionRequest;
 import com.geeksforless.tuleninov.assistantweb.data.expression.ExpressionUIResponse;
 import com.geeksforless.tuleninov.assistantweb.feignclient.ExpressionServiceFeignClient;
-import com.geeksforless.tuleninov.assistantweb.service.crud.user.UserServiceMessagesMaker;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -27,7 +26,7 @@ public class ExpressionService {
      * Create the expression in the database.
      *
      * @param request request with expression parameters
-     * @return expression from database in response format
+     * @return true - if expression created in the database
      */
     public boolean create(SaveExpressionRequest request) {
         if (expressionServiceFeignClient.existsByExpression(request.expression())) {

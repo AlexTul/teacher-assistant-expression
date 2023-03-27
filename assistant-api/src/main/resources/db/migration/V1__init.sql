@@ -24,19 +24,8 @@ create table user_role
 create table expressions
 (
     id bigserial not null primary key,
-    expression text not null unique
-);
-
-create table roots
-(
-    id bigserial not null primary key,
-    value decimal not null unique
-);
-
-create table expression_root
-(
-    expression_id bigserial not null references expressions (id),
-    root_id bigserial not null references roots (id)
+    expression text not null unique,
+    root decimal not null
 );
 
 -- FILL TABLES WITH DEV DATA --

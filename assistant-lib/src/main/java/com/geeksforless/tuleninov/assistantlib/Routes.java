@@ -21,6 +21,7 @@ public final class Routes {
     public static final String URL_PROFILE = "/profile";
     public static final String URL_EXPRESSION = "/expression";
     public static final String URL_MENU = "/menu";
+    public static final String URL_ROOT = "/root";
 
 
 }

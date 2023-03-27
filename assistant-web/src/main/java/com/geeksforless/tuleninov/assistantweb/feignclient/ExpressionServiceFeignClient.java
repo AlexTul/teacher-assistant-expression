@@ -38,12 +38,12 @@ public interface ExpressionServiceFeignClient {
     Page<ExpressionUIResponse> getAll(Pageable pageable);
 
     /**
-     * Exists expression in the database.
+     * Checking for the existence of an expression in the database.
      *
      * @param expression expression from user
      * @return true - if expression exists in the database and false - is expression does not exist in the database
      */
-    @GetMapping(value = URL_EXPRESSION + "/{expression}")
+    @GetMapping(value = URL_EXPRESSION + "/c" + "/{expression}")
     boolean existsByExpression(@PathVariable String expression);
 
     /**

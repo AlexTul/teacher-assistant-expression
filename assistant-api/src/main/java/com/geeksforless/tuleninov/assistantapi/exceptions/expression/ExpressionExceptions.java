@@ -17,16 +17,6 @@ public class ExpressionExceptions {
      * @param expression expression from user
      * @return specific HTTP response status codes
      */
-    public static ResponseStatusException expressionNotFound(String expression) {
-        return new ResponseStatusException(HttpStatus.NOT_FOUND, "Expression '" + expression + "' was not found");
-    }
-
-    /**
-     * Exceptions process for Expression with specific HTTP response status codes BAD_REQUEST.
-     *
-     * @param expression expression from user
-     * @return specific HTTP response status codes
-     */
     public static ResponseStatusException duplicateExpression(String expression) {
         return new ResponseStatusException(HttpStatus.BAD_REQUEST, "Expression '" + expression + "' already taken");
     }

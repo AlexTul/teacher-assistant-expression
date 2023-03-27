@@ -10,13 +10,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 
-import static com.geeksforless.tuleninov.assistantlib.Routes.*;
+import static com.geeksforless.tuleninov.assistantlib.Routes.URL_EXPRESSION;
 
 /**
  * Rest controller for the Expression.
@@ -32,7 +31,6 @@ public class ExpressionController {
     public ExpressionController(ExpressionCRUD expressionCRUD) {
         this.expressionCRUD = expressionCRUD;
     }
-
 
     /**
      * Create the expression in the database.
@@ -62,12 +60,12 @@ public class ExpressionController {
     }
 
     /**
-     * Exists expression in the database.
+     * Checking for the existence of an expression in the database.
      *
      * @param expression expression from user
      * @return true - if expression exists in the database and false - is expression does not exist in the database
      */
-    @GetMapping(value = URL_EXPRESSION + "/{expression}")
+    @GetMapping(value = URL_EXPRESSION + "/c" + "/{expression}")
     public boolean existsByExpression(@PathVariable String expression) {
         return expressionCRUD.existsByExpression(expression);
     }

@@ -1,7 +1,12 @@
 package com.geeksforless.tuleninov.assistantweb.controller.expression;
 
 import com.geeksforless.tuleninov.assistantlib.data.expression.SaveExpressionRequest;
+import com.geeksforless.tuleninov.assistantweb.controller.Authenticator;
+import com.geeksforless.tuleninov.assistantweb.model.role.RoleType;
+import com.geeksforless.tuleninov.assistantweb.service.calculator.Calculable;
+import com.geeksforless.tuleninov.assistantweb.service.calculator.Calculator;
 import com.geeksforless.tuleninov.assistantweb.service.crud.expression.ExpressionService;
+import com.geeksforless.tuleninov.assistantweb.service.crud.user.UserService;
 import com.geeksforless.tuleninov.assistantweb.service.validation.ExpressionValidationService;
 import com.geeksforless.tuleninov.assistantweb.service.validation.Validable;
 import org.springframework.stereotype.Controller;
@@ -11,8 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import static com.geeksforless.tuleninov.assistantlib.Routes.URL_ACTION;
-import static com.geeksforless.tuleninov.assistantlib.Routes.URL_EXPRESSION;
+import static com.geeksforless.tuleninov.assistantlib.Routes.*;
 import static com.geeksforless.tuleninov.assistantweb.Constants.SCOPE_MESSAGE;
 
 /**
@@ -26,9 +30,11 @@ import static com.geeksforless.tuleninov.assistantweb.Constants.SCOPE_MESSAGE;
 public class ExpressionController {
 
     private final ExpressionService expressionService;
+    private final UserService userService;
 
-    public ExpressionController(ExpressionService expressionService) {
+    public ExpressionController(ExpressionService expressionService, UserService userService) {
         this.expressionService = expressionService;
+        this.userService = userService;
     }
 
     /**
@@ -53,7 +59,7 @@ public class ExpressionController {
     @PostMapping()
     public String createExpressionPost(@Valid SaveExpressionRequest request,
                                        Model model, HttpServletRequest httpRequest) {
-        if (processValid(request.expression(), model)) {
+        if (processValid(request, model)) {
             boolean created = expressionService.create(request);
 
             if (!created) {
@@ -78,24 +84,41 @@ public class ExpressionController {
     public String deleteExpression(@PathVariable(value = "id") long id) {
         expressionService.delete(id);
 
-        return "redirect:" + URL_ACTION;
+        var user = new Authenticator(userService).getUserUI();
+        if (user == null) return null;
+
+        if (user.getRoles().get(0).getName().equals(RoleType.ROLE_ADMIN.toString())) {
+            return "redirect:" + URL_REPORT;
+        } else {
+            return "redirect:" + URL_ACTION;
+        }
     }
 
     /**
      * Validate expression.
      *
-     * @param expression expression from user
+     * @param request request with expression parameters
      * @param model      holder for model attributes
      * @return true - if expression is validated
      */
-    private boolean processValid(String expression, Model model) {
+    private boolean processValid(SaveExpressionRequest request, Model model) {
         Validable valid = new ExpressionValidationService();
-        if (!valid.isValidBrackets(expression)) {
+        var expression = request.expression();
+        var root = request.root();
+
+        if (!valid.isValidBrackets(request.expression())) {
             model.addAttribute(SCOPE_MESSAGE, "Expression: '" + expression + "' is not correct. Check brackets.");
             return false;
         }
-        if (!valid.isValidExpressionSings(expression)) {
+        if (!valid.isValidExpressionSings(request.expression())) {
             model.addAttribute(SCOPE_MESSAGE, "Expression: '" + expression + "' is not correct. Check math signs.");
+            return false;
+        }
+
+        Calculable calculable = new Calculator();
+        double calculate = calculable.calculate(expression, root);
+        if (!(calculate == 0.0)) {
+            model.addAttribute(SCOPE_MESSAGE, "Root: '" + root + "' is not correct.");
             return false;
         }
 

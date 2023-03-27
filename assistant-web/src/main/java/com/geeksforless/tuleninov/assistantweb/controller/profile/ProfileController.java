@@ -1,17 +1,12 @@
 package com.geeksforless.tuleninov.assistantweb.controller.profile;
 
+import com.geeksforless.tuleninov.assistantweb.controller.Authenticator;
 import com.geeksforless.tuleninov.assistantweb.model.role.RoleType;
-import com.geeksforless.tuleninov.assistantweb.model.user.CustomUserDetail;
-import com.geeksforless.tuleninov.assistantweb.model.user.UserUI;
 import com.geeksforless.tuleninov.assistantweb.service.crud.user.UserService;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.Objects;
 
 import static com.geeksforless.tuleninov.assistantlib.Routes.URL_PROFILE;
 import static com.geeksforless.tuleninov.assistantweb.Constants.*;
@@ -39,7 +34,7 @@ public class ProfileController {
      */
     @GetMapping
     public String getProfilePage(Model model) {
-        var user = getUserUI();
+        var user = new Authenticator(userService).getUserUI();
         if (user == null) return null;
 
         boolean isAdmin = false;
@@ -55,22 +50,5 @@ public class ProfileController {
         model.addAttribute(SCOPE_USER, user);
 
         return "register/register-update";
-    }
-
-    /**
-     * Find the authenticated user.
-     *
-     * @return the authenticated user
-     */
-    private UserUI getUserUI() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth == null) {
-            return null;
-        }
-        Object principal = auth.getPrincipal();
-        CustomUserDetail customUserDetail = (principal instanceof CustomUserDetail) ? (CustomUserDetail) principal : null;
-        String email = Objects.nonNull(customUserDetail) ? customUserDetail.getUsername() : null;
-
-        return userService.findByEmail(email);
     }
 }
