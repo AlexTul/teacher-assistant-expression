@@ -18,7 +18,7 @@ public class ExpressionExceptions {
      * @return specific HTTP response status codes
      */
     public static ResponseStatusException expressionNotFound(String expression) {
-        return new ResponseStatusException(HttpStatus.NOT_FOUND, "Expression " + expression + " was not found");
+        return new ResponseStatusException(HttpStatus.NOT_FOUND, "Expression '" + expression + "' was not found");
     }
 
     /**
@@ -28,6 +28,6 @@ public class ExpressionExceptions {
      * @return specific HTTP response status codes
      */
     public static ResponseStatusException duplicateExpression(String expression) {
-        return new ResponseStatusException(HttpStatus.BAD_REQUEST, "Expression " + expression + " already taken");
+        return new ResponseStatusException(HttpStatus.BAD_REQUEST, "Expression '" + expression + "' already taken");
     }
 }

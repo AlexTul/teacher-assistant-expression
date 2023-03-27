@@ -10,4 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @version 01
  */
 public interface ExpressionRepository extends JpaRepository<Expression, Long> {
+
+    boolean existsByExpression(String expression);
+
 }

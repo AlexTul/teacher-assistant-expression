@@ -56,12 +56,12 @@ public interface UserServiceFeignClient {
     UserUIResponse getUserById(@PathVariable int id);
 
     /**
-     * Exists user by email in the database in boolean format.
+     * Exists user by email in the database.
      *
-     * @param email email of user
+     * @param email email from user
      * @return true - if user exists in database and false - is user does not exist in database
      */
-    @GetMapping(value = "/register/{email}")
+    @GetMapping(value = URL_REGISTER + "/{email}")
     boolean existsByEmail(@PathVariable String email);
 
     /**

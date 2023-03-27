@@ -29,8 +29,13 @@ public class ExpressionService {
      * @param request request with expression parameters
      * @return expression from database in response format
      */
-    public ExpressionUIResponse create(SaveExpressionRequest request) {
-        return expressionServiceFeignClient.create(request);
+    public boolean create(SaveExpressionRequest request) {
+        if (expressionServiceFeignClient.existsByExpression(request.expression())) {
+            return false;
+        }
+
+        expressionServiceFeignClient.create(request);
+        return true;
     }
 
     /**

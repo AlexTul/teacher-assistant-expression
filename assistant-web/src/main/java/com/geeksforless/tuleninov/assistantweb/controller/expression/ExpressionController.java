@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import static com.geeksforless.tuleninov.assistantlib.Routes.*;
+import static com.geeksforless.tuleninov.assistantlib.Routes.URL_ACTION;
+import static com.geeksforless.tuleninov.assistantlib.Routes.URL_EXPRESSION;
 import static com.geeksforless.tuleninov.assistantweb.Constants.SCOPE_MESSAGE;
 
 /**
@@ -50,10 +51,15 @@ public class ExpressionController {
      * @return expression page
      */
     @PostMapping()
-    public String addExpressionPost(@Valid SaveExpressionRequest request,
-                                    Model model, HttpServletRequest httpRequest) {
+    public String createExpressionPost(@Valid SaveExpressionRequest request,
+                                       Model model, HttpServletRequest httpRequest) {
         if (processValid(request.expression(), model)) {
-            expressionService.create(request);
+            boolean created = expressionService.create(request);
+
+            if (!created) {
+                httpRequest.getSession().setAttribute(SCOPE_MESSAGE, "Expression '" + request.expression() + "' is already exists.");
+                return "redirect:/expression";
+            }
 
             httpRequest.getSession().setAttribute(SCOPE_MESSAGE, "Expression created successfully.");
             return "redirect:/expression";

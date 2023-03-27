@@ -30,6 +30,14 @@ public interface ExpressionCRUD {
     Page<ExpressionResponse> findAll(Pageable pageable);
 
     /**
+     * Exists expression in the database.
+     *
+     * @param expression expression from user
+     * @return true - if expression exists in the database and false - is expression does not exist in the database
+     */
+    boolean existsByExpression(String expression);
+
+    /**
      * Delete the expression in the database.
      *
      * @param id id of expression

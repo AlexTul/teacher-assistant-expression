@@ -58,8 +58,18 @@ public class ExpressionController {
     @GetMapping(value = URL_EXPRESSION, produces = MediaType.APPLICATION_JSON_VALUE)
     @PageableAsQueryParam
     Page<ExpressionResponse> getAll(@Parameter(hidden = true) Pageable pageable) {
-        Page<ExpressionResponse> all = expressionCRUD.findAll(pageable);
         return expressionCRUD.findAll(pageable);
+    }
+
+    /**
+     * Exists expression in the database.
+     *
+     * @param expression expression from user
+     * @return true - if expression exists in the database and false - is expression does not exist in the database
+     */
+    @GetMapping(value = URL_EXPRESSION + "/{expression}")
+    public boolean existsByExpression(@PathVariable String expression) {
+        return expressionCRUD.existsByExpression(expression);
     }
 
     /**

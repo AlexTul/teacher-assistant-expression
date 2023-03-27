@@ -1,6 +1,7 @@
 package com.geeksforless.tuleninov.assistantapi.service.expression;
 
 import com.geeksforless.tuleninov.assistantapi.data.expression.ExpressionResponse;
+import com.geeksforless.tuleninov.assistantapi.exceptions.expression.ExpressionExceptions;
 import com.geeksforless.tuleninov.assistantapi.model.expression.Expression;
 import com.geeksforless.tuleninov.assistantapi.repository.ExpressionRepository;
 import com.geeksforless.tuleninov.assistantlib.data.expression.SaveExpressionRequest;
@@ -42,6 +43,17 @@ public class ExpressionService implements ExpressionCRUD {
     }
 
     /**
+     * Exists expression in the database.
+     *
+     * @param expression expression from user
+     * @return true - if expression exists in the database and false - is expression does not exist in the database
+     */
+    @Override
+    public boolean existsByExpression(String expression) {
+        return expressionRepository.existsByExpression(expression);
+    }
+
+    /**
      * Delete the expression in the database.
      *
      * @param id id of expression
@@ -58,9 +70,9 @@ public class ExpressionService implements ExpressionCRUD {
      */
     private void validateUniqueFields(SaveExpressionRequest request) {
         String expression = request.expression();
-//        if (expressionRepository.existsByExpression(expression)) {
-//            throw ExpressionExceptions.duplicateExpression(expression);
-//        }
+        if (existsByExpression(expression)) {
+            throw ExpressionExceptions.duplicateExpression(expression);
+        }
     }
 
     /**
