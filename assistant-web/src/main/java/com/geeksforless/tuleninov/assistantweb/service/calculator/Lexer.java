@@ -2,6 +2,7 @@ package com.geeksforless.tuleninov.assistantweb.service.calculator;
 
 import com.geeksforless.tuleninov.assistantweb.service.calculator.token.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -20,12 +21,7 @@ public class Lexer {
             if (token.isBlank()) {
                 continue;
             } else if (isNumber(token)) {
-                double afterParse;
-                try {
-                    afterParse = Integer.parseInt(token);
-                } catch (NumberFormatException e1) {
-                    afterParse = Double.parseDouble(token);
-                }
+                var afterParse = BigDecimal.valueOf(Double.parseDouble(token));
                 tokens.add(new NumberToken(afterParse));
                 continue;
             }

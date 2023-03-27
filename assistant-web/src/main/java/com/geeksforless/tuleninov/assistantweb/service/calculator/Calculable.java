@@ -1,7 +1,9 @@
 package com.geeksforless.tuleninov.assistantweb.service.calculator;
 
+import java.math.BigDecimal;
+
 public interface Calculable {
 
-    double calculate(String input, double root);
+    BigDecimal calculate(String input, double root);
 
 }

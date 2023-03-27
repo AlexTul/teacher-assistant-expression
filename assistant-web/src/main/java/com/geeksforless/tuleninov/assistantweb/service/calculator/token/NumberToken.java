@@ -1,6 +1,8 @@
 package com.geeksforless.tuleninov.assistantweb.service.calculator.token;
 
-public record NumberToken(Double value) implements Token {
+import java.math.BigDecimal;
+
+public record NumberToken(BigDecimal value) implements Token {
 
     @Override
     public TokenType type() {

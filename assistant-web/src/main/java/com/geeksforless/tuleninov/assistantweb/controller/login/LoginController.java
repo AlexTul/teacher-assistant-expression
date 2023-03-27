@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static com.geeksforless.tuleninov.assistantlib.Routes.URL_INDEX;
 import static com.geeksforless.tuleninov.assistantlib.Routes.URL_LOGIN;
 import static com.geeksforless.tuleninov.assistantweb.Constants.SCOPE_MESSAGE;
 
@@ -16,7 +17,7 @@ import static com.geeksforless.tuleninov.assistantweb.Constants.SCOPE_MESSAGE;
  * @version 01
  */
 @Controller
-@RequestMapping(value = URL_LOGIN)
+@RequestMapping(value = URL_INDEX)
 public class LoginController {
 
     /**

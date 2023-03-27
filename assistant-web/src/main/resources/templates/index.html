@@ -18,24 +18,21 @@
     <div class="col-lg-5"></div>
 
     <div class="col-lg-2">
-        <form class="form-signing" th:method="post" th:action="@{/login}">
+        <form class="form-signing" th:method="post" th:action="@{/}">
             <h4 class="h3 mb-3 font-weight-normal" style="text-align: center" th:text="#{login.register}"></h4>
 
             <label for="login" class="sr-only" th:text="#{form.login}"></label>
             <input type="text" id="login" name="email" class="form-control"
                    placeholder="email@gmail.com"
                    minlength="2" maxlength="40" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" required>
-            <p style="color: red" th:text="${loginValidate}"></p>
 
             <label for="password" class="sr-only" th:text="#{form.password}"></label>
             <input type="password" id="password" name="password" class="form-control"
                    placeholder="Password"
                    minlength="10" maxlength="20" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=\S+$).{8,20}$" required>
-            <p style="color: red" th:text="${passwordValidate}"></p>
+            <br>
 
-            <!--Log In button-->
             <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{login}"></button>
-            <!--Log In button-->
         </form>
     </div>
 
@@ -50,11 +47,9 @@
     <div class="col-lg-1"></div>
 
     <div class="col-lg-1">
-        <!-- Register link -->
         <div id="register-link" class="text-right">
             <a class="text-info" th:text="#{register}" href="/register"></a>
         </div>
-        <!-- Register link -->
     </div>
 
     <div class="col-lg-5"></div>

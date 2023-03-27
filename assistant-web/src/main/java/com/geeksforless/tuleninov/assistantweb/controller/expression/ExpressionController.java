@@ -16,8 +16,12 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 import static com.geeksforless.tuleninov.assistantlib.Routes.*;
 import static com.geeksforless.tuleninov.assistantweb.Constants.SCOPE_MESSAGE;
+import static java.lang.Math.ceil;
 
 /**
  * Controller for the expression page.
@@ -103,8 +107,10 @@ public class ExpressionController {
      */
     private boolean processValid(SaveExpressionRequest request, Model model) {
         Validable valid = new ExpressionValidationService();
+        Calculable calculable = new Calculator();
         var expression = request.expression();
         var root = request.root();
+        var calculate = calculable.calculate(expression, root);
 
         if (!valid.isValidBrackets(request.expression())) {
             model.addAttribute(SCOPE_MESSAGE, "Expression: '" + expression + "' is not correct. Check brackets.");
@@ -115,9 +121,7 @@ public class ExpressionController {
             return false;
         }
 
-        Calculable calculable = new Calculator();
-        double calculate = calculable.calculate(expression, root);
-        if (!(calculate == 0.0)) {
+        if (!(calculate.compareTo(BigDecimal.valueOf(0)) == 0.00)) {
             model.addAttribute(SCOPE_MESSAGE, "Root: '" + root + "' is not correct.");
             return false;
         }

@@ -4,14 +4,16 @@ import com.geeksforless.tuleninov.assistantweb.service.calculator.token.BinaryOp
 import com.geeksforless.tuleninov.assistantweb.service.calculator.token.NumberToken;
 import com.geeksforless.tuleninov.assistantweb.service.calculator.token.Token;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 
 public class StackMachine {
 
-    public double evaluate(List<Token> postfixExpression) {
-        Deque<Double> valueStack = new LinkedList<>();
+    public BigDecimal evaluate(List<Token> postfixExpression) {
+        Deque<BigDecimal> valueStack = new LinkedList<>();
         for (Token token : postfixExpression) {
             if (token instanceof NumberToken number) {
                 valueStack.push(number.value());
@@ -19,19 +21,19 @@ public class StackMachine {
                 var right = valueStack.pop();
                 var left = valueStack.pop();
                 var result = switch (operation.operationType()) {
-                    case PLUS -> left + right;
-                    case MINUS -> left - right;
-                    case MULTIPLY -> left * right;
+                    case PLUS -> left.add(right);
+                    case MINUS -> left.subtract(right);
+                    case MULTIPLY -> left.multiply(right);
                     case DIVIDE -> {
-                        if (right == 0) {
+                        if (right.compareTo(BigDecimal.valueOf(0)) == 0) {
                             throw new RuntimeException("Divide by zero!");
                         }
-                        yield left / right;
+                        yield left.divide(right);
                     }
                 };
                 valueStack.push(result);
             }
         }
-        return valueStack.pop();
+        return valueStack.pop().setScale(2, RoundingMode.HALF_UP);
     }
 }

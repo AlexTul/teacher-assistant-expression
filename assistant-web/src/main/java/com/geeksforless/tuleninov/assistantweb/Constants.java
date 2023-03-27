@@ -21,6 +21,7 @@ public final class Constants {
     public static final String SCOPE_SIZE = "size";
     public static final String SCOPE_IS_ADMIN = "isAdmin";
     public static final String SCOPE_IS_USER = "isUser";
+    public static final String SCOPE_ROOT = "root";
     // endregion scope
 
 

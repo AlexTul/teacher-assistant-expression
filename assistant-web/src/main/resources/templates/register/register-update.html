@@ -24,29 +24,24 @@
             <input type="text" id="firstname" name="firstName" class="form-control"
                    th:field="*{firstName}" placeholder="First name"
                    minlength="2" maxlength="20" pattern="^[A-Za-zА-ЩЬЮЯҐІЇЄа-щьюяґіїє'\\- ]{1,20}" required>
-            <p style="color: red" th:text="${firstname}"></p>
 
             <label for="lastname" class="sr-only" th:text="#{form.lastname}"></label>
             <input type="text" id="lastname" name="lastName" class="form-control"
                    th:field="*{lastName}" placeholder="Last name"
                    minlength="2" maxlength="20" pattern="^[A-Za-zА-ЩЬЮЯҐІЇЄа-щьюяґіїє'\\- ]{1,20}" required>
-            <p style="color: red" th:text="${lastname}"></p>
 
             <label for="email" class="sr-only" th:text="#{form.login}"></label>
             <input type="text" id="email" name="email" class="form-control"
                    th:field="*{email}" placeholder="email@gmail.com"
                    minlength="2" maxlength="40" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" required>
-            <p style="color: red" th:text="${loginValidate}"></p>
 
             <label for="password" class="sr-only" th:text="#{form.password}"></label>
             <input type="password" id="password" name="password" class="form-control"
                    placeholder="Password"
                    minlength="10" maxlength="20" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=\S+$).{8,20}$" required>
-            <p style="color: red" th:text="${passwordValidate}"></p>
+            <br>
 
-            <!-- Register button -->
             <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{register}"></button>
-            <!-- Register button -->
         </form>
     </div>
 

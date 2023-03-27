@@ -2,6 +2,7 @@ package com.geeksforless.tuleninov.assistantweb.service.calculator;
 
 import com.geeksforless.tuleninov.assistantweb.service.calculator.token.Token;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class Calculator implements Calculable {
@@ -11,7 +12,7 @@ public class Calculator implements Calculable {
     private final StackMachine stackMachine = new StackMachine();
 
     @Override
-    public double calculate(String expression, double root) {
+    public BigDecimal calculate(String expression, double root) {
         var prepared = prepareExpression(expression, root);
 
         List<Token> tokens = lexer.getTokens(prepared);

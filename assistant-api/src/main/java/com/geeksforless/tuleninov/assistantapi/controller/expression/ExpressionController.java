@@ -16,6 +16,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.validation.Valid;
 
 import static com.geeksforless.tuleninov.assistantlib.Routes.URL_EXPRESSION;
+import static com.geeksforless.tuleninov.assistantlib.Routes.URL_ROOT;
 
 /**
  * Rest controller for the Expression.
@@ -60,12 +61,25 @@ public class ExpressionController {
     }
 
     /**
+     * Get all expressions by root from database in response format with pagination information.
+     *
+     * @param pageable abstract interface for pagination information
+     * @param root root of expression
+     * @return all expressions from database in response format
+     */
+    @GetMapping(value = URL_EXPRESSION + URL_ROOT + "/{root}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PageableAsQueryParam
+    Page<ExpressionResponse> getAllByRoot(@Parameter(hidden = true) Pageable pageable, @PathVariable double root) {
+        return expressionCRUD.findAllByRoot(pageable, root);
+    }
+
+    /**
      * Checking for the existence of an expression in the database.
      *
      * @param expression expression from user
      * @return true - if expression exists in the database and false - is expression does not exist in the database
      */
-    @GetMapping(value = URL_EXPRESSION + "/c" + "/{expression}")
+    @GetMapping(value = URL_EXPRESSION + URL_EXPRESSION + "/{expression}")
     public boolean existsByExpression(@PathVariable String expression) {
         return expressionCRUD.existsByExpression(expression);
     }

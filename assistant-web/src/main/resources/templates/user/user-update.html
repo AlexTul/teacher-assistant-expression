@@ -29,12 +29,9 @@
             <input type="password" id="confirmPassword" name="confirmPassword" class="form-control"
                    placeholder="Confirm password"
                    minlength="10" maxlength="20" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=\S+$).{8,20}$" required>
-            <p style="color: red" th:text="${confirmPasswordValidate}"></p>
-            <p style="color: red" th:text="${passwordConfirming}"></p>
+            <br>
 
-            <!-- Register button -->
             <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{register}"></button>
-            <!-- Register button -->
         </form>
     </div>
 

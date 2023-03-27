@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import static com.geeksforless.tuleninov.assistantlib.Routes.URL_EXPRESSION;
+import static com.geeksforless.tuleninov.assistantlib.Routes.URL_ROOT;
 
 /**
  * Feign Client for the Expression.
@@ -38,12 +39,22 @@ public interface ExpressionServiceFeignClient {
     Page<ExpressionUIResponse> getAll(Pageable pageable);
 
     /**
+     * Get all expressions by root from database in response format with pagination information.
+     *
+     * @param pageable abstract interface for pagination information
+     * @param root root of expression
+     * @return all expressions from database in response format
+     */
+    @GetMapping(value = URL_EXPRESSION + URL_ROOT + "/{root}", produces = MediaType.APPLICATION_JSON_VALUE)
+    Page<ExpressionUIResponse> getAllByRoot(Pageable pageable, @PathVariable double root);
+
+    /**
      * Checking for the existence of an expression in the database.
      *
      * @param expression expression from user
      * @return true - if expression exists in the database and false - is expression does not exist in the database
      */
-    @GetMapping(value = URL_EXPRESSION + "/c" + "/{expression}")
+    @GetMapping(value = URL_EXPRESSION + URL_EXPRESSION + "/{expression}")
     boolean existsByExpression(@PathVariable String expression);
 
     /**

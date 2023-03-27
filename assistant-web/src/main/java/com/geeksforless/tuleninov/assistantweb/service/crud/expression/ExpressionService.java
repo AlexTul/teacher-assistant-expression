@@ -48,6 +48,17 @@ public class ExpressionService {
     }
 
     /**
+     * Find all expressions by root from database in response format with pagination information.
+     *
+     * @param pageable abstract interface for pagination information
+     * @param root root of expression
+     * @return all expressions from database in response format
+     */
+    public Page<ExpressionUIResponse> findAllByRoot(Pageable pageable, double root) {
+        return expressionServiceFeignClient.getAllByRoot(pageable, root);
+    }
+
+    /**
      * Delete the expression in the database.
      *
      * @param id id of expression

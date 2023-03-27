@@ -30,6 +30,15 @@ public interface ExpressionCRUD {
     Page<ExpressionResponse> findAll(Pageable pageable);
 
     /**
+     * Find all expressions by root from the database in response format with pagination information.
+     *
+     * @param pageable abstract interface for pagination information
+     * @param root root of expression
+     * @return all expressions from the database in response format
+     */
+    Page<ExpressionResponse> findAllByRoot(Pageable pageable, double root);
+
+    /**
      * Checking for the existence of an expression in the database.
      *
      * @param expression expression from user
