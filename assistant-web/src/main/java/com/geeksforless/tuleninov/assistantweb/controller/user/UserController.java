@@ -3,6 +3,8 @@ package com.geeksforless.tuleninov.assistantweb.controller.user;
 import com.geeksforless.tuleninov.assistantweb.config.pagination.PaginationConfig;
 import com.geeksforless.tuleninov.assistantweb.data.user.OverrideUserPasswordRequest;
 import com.geeksforless.tuleninov.assistantweb.service.crud.user.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +15,7 @@ import javax.validation.Valid;
 
 import static com.geeksforless.tuleninov.assistantlib.Routes.URL_ADMIN;
 import static com.geeksforless.tuleninov.assistantlib.Routes.URL_USER;
-import static com.geeksforless.tuleninov.assistantweb.Constants.SCOPE_USERS;
+import static com.geeksforless.tuleninov.assistantweb.Constants.*;
 
 /**
  * Controller for the user.
@@ -25,6 +27,7 @@ import static com.geeksforless.tuleninov.assistantweb.Constants.SCOPE_USERS;
 @RequestMapping(value = URL_ADMIN + URL_USER)
 public class UserController {
 
+    private static final Logger log = LoggerFactory.getLogger(UserController.class);
     private final UserService userService;
 
     public UserController(UserService userService) {
@@ -58,10 +61,12 @@ public class UserController {
      */
     @GetMapping(value = "/{email}")
     public String getPasswordUpdatePage(@PathVariable(value = "email") String email,
-                                        Model model) {
+                                        Model model, HttpServletRequest httpRequest) {
         var userUI = userService.findByEmail(email);
 
-        model.addAttribute("user", userUI);
+        model.addAttribute(SCOPE_USER, userUI);
+        model.addAttribute(SCOPE_MESSAGE, httpRequest.getSession().getAttribute(SCOPE_MESSAGE));
+        httpRequest.getSession().removeAttribute(SCOPE_MESSAGE);
 
         return "user/user-update";
     }
@@ -75,12 +80,17 @@ public class UserController {
      */
     @PutMapping(value = "/{email}")
     public String updatePasswordUser(@PathVariable(value = "email") String email,
-                                     @Valid OverrideUserPasswordRequest request) {
+                                     @Valid OverrideUserPasswordRequest request,
+                                     HttpServletRequest httpRequest) {
         boolean changed = userService.changePasswordByEmail(email, request);
 
         if (!changed) {
-            // todo
+            log.info("New password and confirmation password do not match");
+            httpRequest.getSession().setAttribute(SCOPE_MESSAGE, "New password and confirmation password do not match");
+            return "redirect:" + URL_ADMIN + URL_USER + "/{email}";
         }
+
+        log.info("Password for'" + email + "' was changed.");
 
         return "redirect:" + URL_ADMIN + URL_USER;
     }
@@ -94,6 +104,7 @@ public class UserController {
     @DeleteMapping(value = "/{email}")
     public String deleteUser(@PathVariable(value = "email") String email) {
         userService.delete(email);
+        log.info("User '" + email + "' was deleted.");
 
         return "redirect:" + URL_ADMIN + URL_USER;
     }

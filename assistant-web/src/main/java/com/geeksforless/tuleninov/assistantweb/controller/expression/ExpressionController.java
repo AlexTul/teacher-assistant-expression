@@ -9,19 +9,18 @@ import com.geeksforless.tuleninov.assistantweb.service.crud.expression.Expressio
 import com.geeksforless.tuleninov.assistantweb.service.crud.user.UserService;
 import com.geeksforless.tuleninov.assistantweb.service.validation.ExpressionValidationService;
 import com.geeksforless.tuleninov.assistantweb.service.validation.Validable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 import static com.geeksforless.tuleninov.assistantlib.Routes.*;
 import static com.geeksforless.tuleninov.assistantweb.Constants.SCOPE_MESSAGE;
-import static java.lang.Math.ceil;
 
 /**
  * Controller for the expression page.
@@ -33,6 +32,7 @@ import static java.lang.Math.ceil;
 @RequestMapping(value = URL_EXPRESSION)
 public class ExpressionController {
 
+    private static final Logger log = LoggerFactory.getLogger(ExpressionController.class);
     private final ExpressionService expressionService;
     private final UserService userService;
 
@@ -67,11 +67,13 @@ public class ExpressionController {
             boolean created = expressionService.create(request);
 
             if (!created) {
+                log.info("Expression '" + request.expression() + "' is already exists.");
                 httpRequest.getSession().setAttribute(SCOPE_MESSAGE, "Expression '" + request.expression() + "' is already exists.");
                 return "redirect:/expression";
             }
 
-            httpRequest.getSession().setAttribute(SCOPE_MESSAGE, "Expression created successfully.");
+            log.info("Expression '" + request.expression() + "' created successfully.");
+            httpRequest.getSession().setAttribute(SCOPE_MESSAGE, "Expression '" + request.expression() + "' created successfully.");
             return "redirect:/expression";
         } else {
             return "expression/expression";
@@ -87,6 +89,7 @@ public class ExpressionController {
     @DeleteMapping(value = "/{id}")
     public String deleteExpression(@PathVariable(value = "id") long id) {
         expressionService.delete(id);
+        log.info("Expression id='" + id + "' was deleted.");
 
         var user = new Authenticator(userService).getUserUI();
         if (user == null) return null;
@@ -113,15 +116,18 @@ public class ExpressionController {
         var calculate = calculable.calculate(expression, root);
 
         if (!valid.isValidBrackets(request.expression())) {
+            log.info("Expression: '" + expression + "' is not correct. Check brackets.");
             model.addAttribute(SCOPE_MESSAGE, "Expression: '" + expression + "' is not correct. Check brackets.");
             return false;
         }
         if (!valid.isValidExpressionSings(request.expression())) {
+            log.info("Expression: '" + expression + "' is not correct. Check math signs.");
             model.addAttribute(SCOPE_MESSAGE, "Expression: '" + expression + "' is not correct. Check math signs.");
             return false;
         }
 
         if (!(calculate.compareTo(BigDecimal.valueOf(0)) == 0.00)) {
+            log.info("Root: '" + root + "' is not correct.");
             model.addAttribute(SCOPE_MESSAGE, "Root: '" + root + "' is not correct.");
             return false;
         }

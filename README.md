@@ -38,10 +38,6 @@ Project ideas:<br>
 Admin credentials:<br>
 ●	login: admin@gmail.com<br>
 ●	password: QAsQaqGMoG1K5hQCCVFd
-QAsQaqGMoG1K5hQCCVFD
-
-Admin menu:<br>
-●	/admins
 
 To see available REST API endpoints, go to [http://localhost:8080/swagger-ui/index.html]()
 To see an application, go to [http://localhost:8081]()

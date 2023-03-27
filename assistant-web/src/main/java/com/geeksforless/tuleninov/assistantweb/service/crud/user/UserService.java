@@ -100,7 +100,6 @@ public class UserService {
      */
     public boolean changePasswordByEmail(String email, OverrideUserPasswordRequest request) {
         if(!request.newPassword().equals(request.confirmPassword())) {
-//            log.info("New password and confirmation password do not match");
             return false;
         }
 
