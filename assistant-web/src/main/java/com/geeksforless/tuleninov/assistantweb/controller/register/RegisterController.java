@@ -41,7 +41,7 @@ public class RegisterController {
      * Add user to database.
      *
      * @param request request with category parameters
-     * @return goods page
+     * @return redirect on success message page
      */
     @PostMapping()
     public String registerPost(@Valid SaveUserRequest request,
@@ -61,7 +61,7 @@ public class RegisterController {
      * Update user`s credentials in the database.
      *
      * @param request request with category parameters
-     * @return goods page
+     * @return redirect on index page
      */
     @PutMapping(value = "/{id}")
     public String updatePut(@PathVariable(value = "id") int id,

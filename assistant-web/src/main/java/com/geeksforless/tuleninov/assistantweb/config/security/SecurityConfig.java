@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(URL_INDEX, URL_REGISTER, URL_MESSAGE).permitAll()
                 .antMatchers("/static/**", "/css/**", "/images/**").permitAll()
                 .antMatchers(URL_ADMIN + "/**").hasRole("ADMIN")
-                .antMatchers(URL_ACTION + "/**").hasRole("USER")
+                .antMatchers(URL_MENU + "/**").hasRole("USER")
                 .anyRequest()
                 .authenticated()
                 .and()

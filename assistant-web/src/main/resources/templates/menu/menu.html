@@ -5,13 +5,13 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Admin</title>
+    <title>Menu</title>
 
     <link rel="stylesheet" href="/css/bootstrap.min.css">
 </head>
 <body>
 <!--Header-->
-<header th:insert="blocks/header-admin :: header"></header>
+<header th:insert="blocks/header-user :: header"></header>
 
 <!--Main layout-->
 <div class="row">
@@ -24,9 +24,9 @@
                 <div class="col-md-4 pt-3">
                     <div class="card" style="background-color:white">
                         <div class="card-body">
-                            <h4 class="card-title" th:text="#{report}"></h4>
+                            <h4 class="card-title" th:text="#{expression.working}"></h4>
                             <p class="card-text" th:text="#{manage.section}"></p>
-                            <form th:method="get" th:action="@{/report}">
+                            <form th:method="get" th:action="@{/action}">
                                 <button type="submit" class="btn btn-primary" th:text="#{manage}"></button>
                             </form>
                         </div>
@@ -35,9 +35,9 @@
                 <div class="col-md-4 pt-3">
                     <div class="card" style="background-color:white">
                         <div class="card-body">
-                            <h4 class="card-title" th:text="#{users}"></h4>
+                            <h4 class="card-title" th:text="#{expression.new}"></h4>
                             <p class="card-text" th:text="#{manage.section}"></p>
-                            <form th:method="get" th:action="@{/admin/user}">
+                            <form th:method="get" th:action="@{/expression}">
                                 <button type="submit" class="btn btn-primary" th:text="#{manage}"></button>
                             </form>
                         </div>

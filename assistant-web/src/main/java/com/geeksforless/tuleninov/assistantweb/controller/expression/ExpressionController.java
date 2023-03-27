@@ -6,14 +6,12 @@ import com.geeksforless.tuleninov.assistantweb.service.validation.ExpressionVali
 import com.geeksforless.tuleninov.assistantweb.service.validation.Validable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import static com.geeksforless.tuleninov.assistantlib.Routes.URL_EXPRESSION;
+import static com.geeksforless.tuleninov.assistantlib.Routes.*;
 import static com.geeksforless.tuleninov.assistantweb.Constants.SCOPE_MESSAGE;
 
 /**
@@ -48,12 +46,12 @@ public class ExpressionController {
     /**
      * Add expression to database.
      *
-     * @param request request with category parameters
-     * @return goods page
+     * @param request request with expression parameters
+     * @return expression page
      */
     @PostMapping()
-    public String registerPost(@Valid SaveExpressionRequest request,
-                               Model model, HttpServletRequest httpRequest) {
+    public String addExpressionPost(@Valid SaveExpressionRequest request,
+                                    Model model, HttpServletRequest httpRequest) {
         if (processValid(request.expression(), model)) {
             expressionService.create(request);
 
@@ -64,14 +62,34 @@ public class ExpressionController {
         }
     }
 
+    /**
+     * Delete expression from the database.
+     *
+     * @param id id of expression
+     * @return user page
+     */
+    @DeleteMapping(value = "/{id}")
+    public String deleteExpression(@PathVariable(value = "id") long id) {
+        expressionService.delete(id);
+
+        return "redirect:" + URL_ACTION;
+    }
+
+    /**
+     * Validate expression.
+     *
+     * @param expression expression from user
+     * @param model      holder for model attributes
+     * @return true - if expression is validated
+     */
     private boolean processValid(String expression, Model model) {
         Validable valid = new ExpressionValidationService();
         if (!valid.isValidBrackets(expression)) {
-            model.addAttribute(SCOPE_MESSAGE, "Expression: " + expression + " is not correct. Check brackets.");
+            model.addAttribute(SCOPE_MESSAGE, "Expression: '" + expression + "' is not correct. Check brackets.");
             return false;
         }
         if (!valid.isValidExpressionSings(expression)) {
-            model.addAttribute(SCOPE_MESSAGE, "Expression: " + expression + " is not correct. Check math signs.");
+            model.addAttribute(SCOPE_MESSAGE, "Expression: '" + expression + "' is not correct. Check math signs.");
             return false;
         }
 

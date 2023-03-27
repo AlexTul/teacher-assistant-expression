@@ -11,54 +11,60 @@
 </head>
 <body>
 <!--Header-->
-<header th:insert="blocks/header :: header"></header>
+<header th:insert="blocks/header-user :: header"></header>
 
 <!--Main layout-->
 <div class="row">
-    <div class="col-lg-2"></div>
+    <div class="col-lg-12">
+        <div class="tab-pane fade show active" id="actions" role="tabpanel"
+             aria-labelledby="internet-tab">
+            <h3 style="text-align: center" th:text="#{expression.working}"></h3>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col" th:text="#{expression}"></th>
+                    <th scope="col" th:text="#{delete}"></th>
+                    <th scope="col">ID</th>
+                    <th scope="col" th:text="#{roots}"></th>
+                    <th scope="col" th:text="#{edit}"></th>
+                    <th scope="col" th:text="#{delete}"></th>
+                </tr>
+                </thead>
 
-    <div class="col-lg-8">
-        <!--Main layout-->
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-4 pt-3">
-                    <div class="card" style="background-color:white">
-                        <div class="card-body">
-                            <h4 class="card-title" th:text="#{report}"></h4>
-                            <p class="card-text" th:text="#{manage.section}"></p>
-                            <form th:method="get" th:action="@{/report}">
-                                <button type="submit" class="btn btn-primary" th:text="#{manage}"></button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 pt-3">
-                    <div class="card" style="background-color:white">
-                        <div class="card-body">
-                            <h4 class="card-title" th:text="#{expression.new}"></h4>
-                            <p class="card-text" th:text="#{manage.section}"></p>
-                            <form th:method="get" th:action="@{/expression}">
-                                <button type="submit" class="btn btn-primary" th:text="#{manage}"></button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 pt-3">
-                    <div class="card" style="background-color:white">
-                        <div class="card-body">
-                            <h4 class="card-title" th:text="#{profile}"></h4>
-                            <p class="card-text" th:text="#{manage.section}"></p>
-                            <form th:method="get" th:action="@{/profile}">
-                                <button type="submit" class="btn btn-primary" th:text="#{manage}"></button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                <tbody>
+                <tr th:each="expression, iStat : ${expressions}">
+                    <td th:text="${expression.id}">Larry</td>
+                    <td th:text="${expression.expression}">Larry</td>
+                    <td>
+                        <form th:method="delete" th:action="@{/expression/{id}(id=${expression.id})}">
+                            <button type="submit" class="btn btn-danger btn-lg"></button>
+                        </form>
+                    </td>
+                </tr>
+<!--                <tr th:each="root, iStat : ${allRoots}">-->
+<!--                    <td th:text="${root.id}">Larry</td>-->
+<!--                    <td th:text="${root.value}">Larry</td>-->
+<!--                    <td>-->
+<!--                        <a class="btn btn-warning btn-lg" href="" th:href="@{/root/{id}(id=${root.id})}"-->
+<!--                           role="button"></a>-->
+<!--                    </td>-->
+<!--                    <td>-->
+<!--                        <form th:method="delete" th:action="@{/root/{id}(id=${root.id})}">-->
+<!--                            <button type="submit" class="btn btn-danger btn-lg"></button>-->
+<!--                        </form>-->
+<!--                    </td>-->
+<!--                </tr>-->
+
+                </tbody>
+            </table>
+
+            <!--Customers pagination-->
+            <pagination th:insert="blocks/pager-expression :: pager"></pagination>
+            <!--Customers pagination-->
+
         </div>
     </div>
-
-    <div class="col-lg-2"></div>
 </div>
 <!--Main layout-->
 

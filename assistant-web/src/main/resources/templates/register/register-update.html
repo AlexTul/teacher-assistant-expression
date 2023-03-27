@@ -11,7 +11,8 @@
 </head>
 <body>
 <!--Header-->
-<header th:insert="blocks/header :: header"></header>
+<header th:if="${isAdmin}" th:insert="blocks/header-admin :: header"></header>
+<header th:if="${isUser}" th:insert="blocks/header-user :: header"></header>
 
 <!--Main layout-->
 <div class="row" style="text-align: center">

@@ -46,6 +46,6 @@ values (0, 'ROLE_ADMIN');
 insert into roles (id, name)
 values (1, 'ROLE_USER');
 insert into users (id, first_name, last_name, email, password)
-values (0, 'Admin', 'Super', 'admin@gmail.com', '$2a$10$EtqjLVUZi2b1iZDa1buSke.5BKTQ73hnhXavJzonOcB4l41srrdhG');
+values (0, 'Admin', 'Super', 'admin@gmail.com', '$2a$10$FnMiwqzRc1L/Gq0mHoERfe7Ne1O7AuKUpOtnBdiOD.mX8bURxe336');
 insert into user_role (user_id, role_id)
 values (0, 0);

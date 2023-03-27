@@ -1,0 +1,30 @@
+<div th:fragment="header" xmlns="http://www.w3.org/1999/html">
+  <header class="container-fluid site-header sticky-top py-1 card shadow-sm">
+    <!--Navbar-->
+    <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+      <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+        <div class="me-3 py-2 text-decoration-none">
+          <a th:href="@{'?locale=uk'}">UK</a>
+          <a th:href="@{'?locale=en'}">EN</a>
+        </div>
+        <a class="me-3 py-2 text-dark text-decoration-none" th:href="@{/menu}" href="#" th:text="#{main}"></a>
+        <a class="me-3 py-2 text-dark text-decoration-none" th:href="@{/logout}" href="#" th:text="#{logout}"></a>
+      </nav>
+    </div>
+    <!--Navbar-->
+
+    <!--Main message-->
+    <div class="container">
+      <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+        <a href="/static" class="d-flex align-items-center text-dark text-decoration-none">
+          <a class="navbar-brand" href="#">
+            <img th:src="@{/images/logo.png}" src="" width="500" height="auto"
+                 class="d-inline-block align-top" alt=""/>
+          </a>
+        </a>
+        <h3 class="display-4 fw-normal" th:text="#{assistant.name}"></h3>
+      </div>
+    </div>
+    <!--Main message-->
+  </header>
+</div>

@@ -11,7 +11,7 @@
 </head>
 <body>
 <!--Header-->
-<header th:insert="blocks/header :: header"></header>
+<header th:insert="blocks/header-admin :: header"></header>
 
 <!--Main layout-->
 <!-- Table of users -->
@@ -32,7 +32,6 @@
                     <th scope="col" th:text="#{delete}"></th>
                 </tr>
                 </thead>
-
                 <tbody>
                 <tr th:each="user, iStat : ${users}">
                     <td th:text="${user.id}">Larry</td>
@@ -52,6 +51,11 @@
                 </tr>
                 </tbody>
             </table>
+
+            <!--Customers pagination-->
+            <pagination th:insert="blocks/pager-user :: pager"></pagination>
+            <!--Customers pagination-->
+
         </div>
     </div>
 </div>

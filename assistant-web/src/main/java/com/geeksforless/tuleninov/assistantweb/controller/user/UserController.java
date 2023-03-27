@@ -13,6 +13,7 @@ import javax.validation.Valid;
 
 import static com.geeksforless.tuleninov.assistantlib.Routes.URL_ADMIN;
 import static com.geeksforless.tuleninov.assistantlib.Routes.URL_USER;
+import static com.geeksforless.tuleninov.assistantweb.Constants.SCOPE_USERS;
 
 /**
  * Controller for the user.
@@ -41,9 +42,9 @@ public class UserController {
     public String getUsersPage(HttpServletRequest request,
                                Model model) {
         var config = PaginationConfig.config(request);
-        var usersUI = userService.findAllByRolesEquals(PageRequest.of(config.page(), config.size()));
+        var users = userService.findAllByRolesEquals(PageRequest.of(config.page(), config.size()));
 
-        model.addAttribute("users", usersUI);
+        model.addAttribute(SCOPE_USERS, users);
 
         return "user/user";
     }

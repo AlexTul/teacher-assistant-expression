@@ -19,9 +19,12 @@ public class UserServiceMessagesMaker {
     public static String makeWelcomeMessage(SaveUserRequest request) {
         return String.format(
                 """
-                        Dear %s,<br>welcome to Teacher assistant for expressions.<br>
-                        Thank you for your choosing!<br><br>
-                        Best regards!<br>Teacher assistant for expressions team<br>
+                        Dear %s,
+                        welcome to Teacher assistant for expressions.
+                        Thank you for your choosing!
+                        
+                        Best regards!
+                        Teacher assistant for expressions team
                         """,
                 request.email());
     }
@@ -35,9 +38,12 @@ public class UserServiceMessagesMaker {
     public static String makeUpdateMessage(SaveUserRequest request) {
         return String.format(
                 """
-                        Dear user, your data was change in Teacher assistant for expressions.
-                        Your first name is: %s, last name is: %s, password is: %s.\n\n
-                        Best regards!\nTeacher assistant for expressions team
+                        Dear user,
+                        your data was change in Teacher assistant for expressions.
+                        Your first name is: %s, last name is: %s, password is: %s.
+                        
+                        Best regards!
+                        Teacher assistant for expressions team
                         """,
                 request.firstName(),
                 request.lastName(),
@@ -53,9 +59,12 @@ public class UserServiceMessagesMaker {
     public static String makeUpdatePasswordMessage(String login, String newPassword) {
         return String.format(
                 """
-                        Dear %s, your password was change in Teacher assistant for expressions.
-                        Your password is: %s.\n\n
-                        Best regards!\nTeacher assistant for expressions team
+                        Dear %s,
+                        your password was change in Teacher assistant for expressions.
+                        Your password is: %s.
+                        
+                        Best regards!
+                        Teacher assistant for expressions team
                         """,
                 login,
                 newPassword);
@@ -69,8 +78,11 @@ public class UserServiceMessagesMaker {
     public static String makeDeleteMessage(String email) {
         return String.format(
                 """
-                        Dear %s, your profile was delete in Teacher assistant for expressions.\n\n
-                        Best regards!\nTeacher assistant for expressions team
+                        Dear %s,
+                        your profile was delete in Teacher assistant for expressions.
+                        
+                        Best regards!
+                        Teacher assistant for expressions team
                         """,
                 email);
     }

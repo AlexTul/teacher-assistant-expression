@@ -1,21 +1,12 @@
 package com.geeksforless.tuleninov.assistantapi.service.expression;
 
 import com.geeksforless.tuleninov.assistantapi.data.expression.ExpressionResponse;
-import com.geeksforless.tuleninov.assistantapi.data.user.UserResponse;
-import com.geeksforless.tuleninov.assistantapi.exceptions.expression.ExpressionExceptions;
-import com.geeksforless.tuleninov.assistantapi.exceptions.user.UserExceptions;
 import com.geeksforless.tuleninov.assistantapi.model.expression.Expression;
-import com.geeksforless.tuleninov.assistantapi.model.role.Role;
-import com.geeksforless.tuleninov.assistantapi.model.user.User;
 import com.geeksforless.tuleninov.assistantapi.repository.ExpressionRepository;
 import com.geeksforless.tuleninov.assistantlib.data.expression.SaveExpressionRequest;
-import com.geeksforless.tuleninov.assistantlib.data.user.SaveUserRequest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.HashSet;
-import java.util.Set;
-
-import static com.geeksforless.tuleninov.assistantapi.exceptions.role.RoleExceptions.roleNotFound;
 
 /**
  * Service class for Expression.
@@ -42,6 +33,22 @@ public class ExpressionService implements ExpressionCRUD {
     public ExpressionResponse create(SaveExpressionRequest request) {
         validateUniqueFields(request);
         return ExpressionResponse.fromExpression(save(request));
+    }
+
+    @Override
+    public Page<ExpressionResponse> findAll(Pageable pageable) {
+        return expressionRepository.findAll(pageable)
+                .map(ExpressionResponse::fromExpression);
+    }
+
+    /**
+     * Delete the expression in the database.
+     *
+     * @param id id of expression
+     */
+    @Override
+    public void deleteByID(long id) {
+        expressionRepository.deleteById(id);
     }
 
     /**

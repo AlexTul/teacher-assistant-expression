@@ -15,6 +15,12 @@ public final class Constants {
     public static final String SCOPE_MESSAGE = "message";
     public static final String SCOPE_USER = "user";
     public static final String SCOPE_EXPRESSION = "expression";
+    public static final String SCOPE_EXPRESSIONS = "expressions";
+    public static final String SCOPE_USERS = "users";
+    public static final String SCOPE_PAGE = "page";
+    public static final String SCOPE_SIZE = "size";
+    public static final String SCOPE_IS_ADMIN = "isAdmin";
+    public static final String SCOPE_IS_USER = "isUser";
     // endregion scope
 
 

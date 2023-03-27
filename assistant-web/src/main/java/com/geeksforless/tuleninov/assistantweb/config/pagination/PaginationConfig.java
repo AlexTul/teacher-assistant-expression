@@ -4,6 +4,9 @@ import com.geeksforless.tuleninov.assistantweb.data.pagination.ConfigDTO;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static com.geeksforless.tuleninov.assistantweb.Constants.SCOPE_PAGE;
+import static com.geeksforless.tuleninov.assistantweb.Constants.SCOPE_SIZE;
+
 /**
  * Pagination configuration.
  * @version 01
@@ -20,13 +23,13 @@ public class PaginationConfig {
      */
     public static ConfigDTO config(HttpServletRequest request) {
         int page = 0;
-        int size = 2;
+        int size = 5;
 
-        if (request.getParameter("page") != null && !request.getParameter("page").isEmpty()) {
-            page = Integer.parseInt(request.getParameter("page")) - 1;
+        if (request.getParameter(SCOPE_PAGE) != null && !request.getParameter(SCOPE_PAGE).isEmpty()) {
+            page = Integer.parseInt(request.getParameter(SCOPE_PAGE)) - 1;
         }
-        if (request.getParameter("size") != null && !request.getParameter("size").isEmpty()) {
-            size = Integer.parseInt(request.getParameter("size"));
+        if (request.getParameter(SCOPE_SIZE) != null && !request.getParameter(SCOPE_SIZE).isEmpty()) {
+            size = Integer.parseInt(request.getParameter(SCOPE_SIZE));
         }
 
         return new ConfigDTO(page, size);

@@ -91,7 +91,7 @@ public class UserController {
      * @param email         email of user
      * @return              true - if user exists in database and false - is user does not exist in database
      */
-    @GetMapping(value = "/register/{email}")
+    @GetMapping(value = URL_REGISTER + "/{email}")
     public boolean existsByEmail(@PathVariable String email) {
         return userCRUD.existsByEmail(email);
     }
