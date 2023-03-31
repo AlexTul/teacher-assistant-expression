@@ -60,10 +60,23 @@ public class ExpressionController {
     }
 
     /**
+     * Get all expressions by user from database in response format with pagination information.
+     *
+     * @param pageable abstract interface for pagination information
+     * @param email    email from user
+     * @return all expressions from database in response format
+     */
+    @GetMapping(value = URL_EXPRESSION + URL_USER + "/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PageableAsQueryParam
+    Page<ExpressionResponse> getAllByUser(@Parameter(hidden = true) Pageable pageable, @PathVariable String email) {
+        return expressionCRUD.findAllByUser(pageable, email);
+    }
+
+    /**
      * Get all expressions by root from database in response format with pagination information.
      *
      * @param pageable abstract interface for pagination information
-     * @param root root of expression
+     * @param root     root of expression
      * @return all expressions from database in response format
      */
     @GetMapping(value = URL_EXPRESSION + URL_ROOT + "/{root}", produces = MediaType.APPLICATION_JSON_VALUE)

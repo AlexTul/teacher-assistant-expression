@@ -1,12 +1,12 @@
 package com.geeksforless.tuleninov.assistantapi.service.user;
 
+import com.geeksforless.tuleninov.assistantapi.data.user.SaveUserRequest;
 import com.geeksforless.tuleninov.assistantapi.data.user.UserResponse;
 import com.geeksforless.tuleninov.assistantapi.exceptions.user.UserExceptions;
 import com.geeksforless.tuleninov.assistantapi.model.role.Role;
 import com.geeksforless.tuleninov.assistantapi.model.user.User;
 import com.geeksforless.tuleninov.assistantapi.repository.RoleRepository;
 import com.geeksforless.tuleninov.assistantapi.repository.UserRepository;
-import com.geeksforless.tuleninov.assistantapi.data.user.SaveUserRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;

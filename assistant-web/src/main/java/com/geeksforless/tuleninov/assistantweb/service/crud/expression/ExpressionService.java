@@ -48,10 +48,21 @@ public class ExpressionService {
     }
 
     /**
+     * Find all expressions by user from database in response format with pagination information.
+     *
+     * @param pageable abstract interface for pagination information
+     * @param email    email from user
+     * @return all expressions from database in response format
+     */
+    public Page<ExpressionUIResponse> findAllByUser(Pageable pageable, String email) {
+        return expressionServiceFeignClient.getAllByUser(pageable, email);
+    }
+
+    /**
      * Find all expressions by root from database in response format with pagination information.
      *
      * @param pageable abstract interface for pagination information
-     * @param root root of expression
+     * @param root     root of expression
      * @return all expressions from database in response format
      */
     public Page<ExpressionUIResponse> findAllByRoot(Pageable pageable, double root) {

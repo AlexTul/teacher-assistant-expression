@@ -1,8 +1,10 @@
 package com.geeksforless.tuleninov.assistantweb.controller.action;
 
 import com.geeksforless.tuleninov.assistantweb.config.pagination.PaginationConfig;
+import com.geeksforless.tuleninov.assistantweb.controller.Authenticator;
 import com.geeksforless.tuleninov.assistantweb.data.expression.ExpressionUIResponse;
 import com.geeksforless.tuleninov.assistantweb.service.crud.expression.ExpressionService;
+import com.geeksforless.tuleninov.assistantweb.service.crud.user.UserService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -27,9 +29,11 @@ import static com.geeksforless.tuleninov.assistantweb.Constants.SCOPE_ROOT;
 public class ActionController {
 
     private final ExpressionService expressionService;
+    private final UserService userService;
 
-    public ActionController(ExpressionService expressionService) {
+    public ActionController(ExpressionService expressionService, UserService userService) {
         this.expressionService = expressionService;
+        this.userService = userService;
     }
 
     /**
@@ -40,7 +44,7 @@ public class ActionController {
     @GetMapping
     public String getActionPage(HttpServletRequest request, Model model) {
 
-        var allExpressions = processFiltering(request);
+        var allExpressions = processGetExpression(request);
 
         model.addAttribute(SCOPE_EXPRESSIONS, allExpressions);
 
@@ -53,7 +57,7 @@ public class ActionController {
      * @param request HttpServletRequest request
      * @return all expressions by user filter from database in response format with pagination information.
      */
-    private Page<ExpressionUIResponse> processFiltering(HttpServletRequest request) {
+    private Page<ExpressionUIResponse> processGetExpression(HttpServletRequest request) {
         String root = request.getParameter(SCOPE_ROOT);
 
         if (root != null) {
@@ -71,7 +75,8 @@ public class ActionController {
                     PageRequest.of(config.page(), config.size()),
                     Double.parseDouble(root));
         } else {
-            allExpressions = expressionService.findAll(PageRequest.of(config.page(), config.size()));
+            var user = new Authenticator(userService).getUserUI();
+            allExpressions = expressionService.findAllByUser(PageRequest.of(config.page(), config.size()), user.getEmail());
         }
         return allExpressions;
     }

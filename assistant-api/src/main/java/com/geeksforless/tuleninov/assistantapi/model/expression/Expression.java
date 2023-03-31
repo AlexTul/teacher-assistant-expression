@@ -1,9 +1,8 @@
 package com.geeksforless.tuleninov.assistantapi.model.expression;
 
-import com.geeksforless.tuleninov.assistantapi.model.root.Root;
+import com.geeksforless.tuleninov.assistantapi.model.user.User;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
@@ -24,6 +23,10 @@ public class Expression {
     private String expression;
 
     private double root;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    private User user;
 
     public Expression() {
     }
@@ -50,6 +53,14 @@ public class Expression {
 
     public void setRoot(double root) {
         this.root = root;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

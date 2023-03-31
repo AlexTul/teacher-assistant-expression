@@ -12,6 +12,7 @@ import javax.validation.constraints.Size;
  * @version 01
  */
 public record SaveUserRequest(
+
         @NotBlank(message = "The first name of user is mandatory")
         @Size(min = 2, max = 30, message = "The first name should be between 2 and 30 characters")
         @Pattern(regexp = "^[A-Za-zА-ЩЬЮЯҐІЇЄа-щьюяґіїє'\\- ]{1,20}", message = "The first name does not match the pattern.")

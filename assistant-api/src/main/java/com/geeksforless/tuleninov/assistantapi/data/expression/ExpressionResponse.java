@@ -13,7 +13,9 @@ import java.math.BigDecimal;
 public record ExpressionResponse(
 
         long id,
+
         String expression,
+
         double root
 
 ) {

@@ -1,13 +1,17 @@
 package com.geeksforless.tuleninov.assistantapi.service.expression;
 
 import com.geeksforless.tuleninov.assistantapi.data.expression.ExpressionResponse;
+import com.geeksforless.tuleninov.assistantapi.data.expression.SaveExpressionRequest;
 import com.geeksforless.tuleninov.assistantapi.exceptions.expression.ExpressionExceptions;
 import com.geeksforless.tuleninov.assistantapi.model.expression.Expression;
+import com.geeksforless.tuleninov.assistantapi.model.user.User;
 import com.geeksforless.tuleninov.assistantapi.repository.ExpressionRepository;
-import com.geeksforless.tuleninov.assistantapi.data.expression.SaveExpressionRequest;
+import com.geeksforless.tuleninov.assistantapi.repository.UserRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import static com.geeksforless.tuleninov.assistantapi.exceptions.user.UserExceptions.userNotFound;
 
 /**
  * Service class for Expression.
@@ -19,9 +23,11 @@ import org.springframework.stereotype.Service;
 public class ExpressionService implements ExpressionCRUD {
 
     private final ExpressionRepository expressionRepository;
+    private final UserRepository userRepository;
 
-    public ExpressionService(ExpressionRepository expressionRepository) {
+    public ExpressionService(ExpressionRepository expressionRepository, UserRepository userRepository) {
         this.expressionRepository = expressionRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -43,10 +49,26 @@ public class ExpressionService implements ExpressionCRUD {
     }
 
     /**
+     * Find all expressions by user from the database in response format with pagination information.
+     *
+     * @param pageable abstract interface for pagination information
+     * @param email    email from user
+     * @return all expressions from the database in response format
+     */
+    @Override
+    public Page<ExpressionResponse> findAllByUser(Pageable pageable, String email) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> userNotFound(email));
+
+        return expressionRepository.findAllByUser(pageable, user)
+                .map(ExpressionResponse::fromExpression);
+    }
+
+    /**
      * Find all expressions by root from the database in response format with pagination information.
      *
      * @param pageable abstract interface for pagination information
-     * @param root root of expression
+     * @param root     root of expression
      * @return all expressions from the database in response format
      */
     @Override
@@ -95,9 +117,13 @@ public class ExpressionService implements ExpressionCRUD {
      * @return expression entity
      */
     private Expression save(SaveExpressionRequest request) {
+        User user = userRepository.findByEmail(request.email())
+                .orElseThrow(() -> userNotFound(request.email()));
+
         var expression = new Expression();
         expression.setExpression(request.expression());
         expression.setRoot(request.root());
+        expression.setUser(user);
         expressionRepository.save(expression);
 
         return expression;

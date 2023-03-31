@@ -25,7 +25,7 @@
     <div class="col-lg-5"></div>
 
     <div class="col-lg-2">
-        <form class="form-signing" th:method="post" th:action="@{/expression}" th:object="${expression}">
+        <form class="form-signing" th:method="post" th:action="@{/expression}" th:object="${user}">
             <h4 class="h3 mb-3 font-weight-normal" style="text-align: center" th:text="#{expression.save}"></h4>
 
             <label for="expression" class="sr-only" th:text="#{form.expression}"></label>
@@ -37,6 +37,8 @@
             <input type="text" id="root" name="root" class="form-control"
                    placeholder="0.0"
                    minlength="1" required>
+
+            <input type="hidden" name="email" th:value="${user.email}">
             <br>
 
             <!--Log In button-->

@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.math.BigDecimal;
 
+import static com.geeksforless.tuleninov.assistantweb.Constants.SCOPE_USER;
 import static com.geeksforless.tuleninov.assistantweb.RoutesWeb.*;
 import static com.geeksforless.tuleninov.assistantweb.Constants.SCOPE_MESSAGE;
 
@@ -48,6 +49,9 @@ public class ExpressionController {
      */
     @GetMapping
     public String getExpressionPage(HttpServletRequest httpRequest, Model model) {
+        var user = new Authenticator(userService).getUserUI();
+        model.addAttribute(SCOPE_USER, user);
+
         model.addAttribute(SCOPE_MESSAGE, httpRequest.getSession().getAttribute(SCOPE_MESSAGE));
         httpRequest.getSession().removeAttribute(SCOPE_MESSAGE);
 

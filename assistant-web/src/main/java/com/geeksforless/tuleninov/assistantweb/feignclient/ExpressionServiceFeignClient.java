@@ -8,8 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import static com.geeksforless.tuleninov.assistantweb.RoutesWeb.URL_EXPRESSION;
-import static com.geeksforless.tuleninov.assistantweb.RoutesWeb.URL_ROOT;
+import static com.geeksforless.tuleninov.assistantweb.RoutesWeb.*;
 
 /**
  * Feign Client for the Expression.
@@ -37,6 +36,16 @@ public interface ExpressionServiceFeignClient {
      */
     @GetMapping(value = URL_EXPRESSION, produces = MediaType.APPLICATION_JSON_VALUE)
     Page<ExpressionUIResponse> getAll(Pageable pageable);
+
+    /**
+     * Find all expressions by user from database in response format with pagination information.
+     *
+     * @param pageable abstract interface for pagination information
+     * @param email    email from user
+     * @return all expressions from database in response format
+     */
+    @GetMapping(value = URL_EXPRESSION + URL_USER + "/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
+    Page<ExpressionUIResponse> getAllByUser(Pageable pageable,  @PathVariable String email);
 
     /**
      * Get all expressions by root from database in response format with pagination information.
