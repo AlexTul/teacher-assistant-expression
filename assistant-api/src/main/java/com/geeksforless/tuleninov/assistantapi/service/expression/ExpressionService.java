@@ -81,11 +81,15 @@ public class ExpressionService implements ExpressionCRUD {
      * Checking for the existence of an expression in the database.
      *
      * @param expression expression from user
+     * @param email email from user
      * @return true - if expression exists in the database and false - is expression does not exist in the database
      */
     @Override
-    public boolean existsByExpression(String expression) {
-        return expressionRepository.existsByExpression(expression);
+    public boolean existsByExpressionAndUser(String expression, String email) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> userNotFound(email));
+
+        return expressionRepository.existsExpressionByExpressionAndUser(expression, user);
     }
 
     /**
@@ -104,9 +108,8 @@ public class ExpressionService implements ExpressionCRUD {
      * @param request request with user parameters
      */
     private void validateUniqueFields(SaveExpressionRequest request) {
-        String expression = request.expression();
-        if (existsByExpression(expression)) {
-            throw ExpressionExceptions.duplicateExpression(expression);
+        if (existsByExpressionAndUser(request.expression(), request.email())) {
+            throw ExpressionExceptions.duplicateExpression(request.expression());
         }
     }
 

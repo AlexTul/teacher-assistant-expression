@@ -45,13 +45,13 @@ public interface ExpressionServiceFeignClient {
      * @return all expressions from database in response format
      */
     @GetMapping(value = URL_EXPRESSION + URL_USER + "/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
-    Page<ExpressionUIResponse> getAllByUser(Pageable pageable,  @PathVariable String email);
+    Page<ExpressionUIResponse> getAllByUser(Pageable pageable, @PathVariable String email);
 
     /**
      * Get all expressions by root from database in response format with pagination information.
      *
      * @param pageable abstract interface for pagination information
-     * @param root root of expression
+     * @param root     root of expression
      * @return all expressions from database in response format
      */
     @GetMapping(value = URL_EXPRESSION + URL_ROOT + "/{root}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -61,10 +61,11 @@ public interface ExpressionServiceFeignClient {
      * Checking for the existence of an expression in the database.
      *
      * @param expression expression from user
+     * @param email email from user
      * @return true - if expression exists in the database and false - is expression does not exist in the database
      */
-    @GetMapping(value = URL_EXPRESSION + URL_EXPRESSION + "/{expression}")
-    boolean existsByExpression(@PathVariable String expression);
+    @GetMapping(value = URL_EXPRESSION + URL_EXPRESSION + "/{expression}" +"/{email}")
+    boolean existsByExpression(@PathVariable String expression, @PathVariable String email);
 
     /**
      * Delete the expression in the database.

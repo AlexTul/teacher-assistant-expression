@@ -6,6 +6,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 /**
  * Interface for working with the repository of Expression.
  *
@@ -18,6 +20,6 @@ public interface ExpressionRepository extends JpaRepository<Expression, Long> {
 
     Page<Expression> findAllByRoot(Pageable pageable, double root);
 
-    boolean existsByExpression(String expression);
+    boolean existsExpressionByExpressionAndUser(String expression, User user);
 
 }
