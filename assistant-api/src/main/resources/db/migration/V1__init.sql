@@ -24,7 +24,7 @@ create table user_role
 create table expressions
 (
     id bigserial not null primary key,
-    expression text not null unique,
+    expression text not null,
     root decimal not null,
     user_id bigserial not null references users (id) on delete cascade
 );

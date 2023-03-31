@@ -29,7 +29,7 @@ public class ExpressionService {
      * @return true - if expression created in the database
      */
     public boolean create(SaveExpressionUIRequest request) {
-        if (expressionServiceFeignClient.existsByExpression(request.expression())) {
+        if (expressionServiceFeignClient.existsByExpression(request.expression(), request.email())) {
             return false;
         }
 

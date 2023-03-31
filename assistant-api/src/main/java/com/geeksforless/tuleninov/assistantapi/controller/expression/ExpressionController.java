@@ -89,11 +89,12 @@ public class ExpressionController {
      * Checking for the existence of an expression in the database.
      *
      * @param expression expression from user
+     * @param email email from user
      * @return true - if expression exists in the database and false - is expression does not exist in the database
      */
-    @GetMapping(value = URL_EXPRESSION + URL_EXPRESSION + "/{expression}")
-    public boolean existsByExpression(@PathVariable String expression) {
-        return expressionCRUD.existsByExpression(expression);
+    @GetMapping(value = URL_EXPRESSION + URL_EXPRESSION + "/{expression}" +"/{email}")
+    public boolean existsByExpression(@PathVariable String expression, @PathVariable String email) {
+        return expressionCRUD.existsByExpressionAndUser(expression, email);
     }
 
     /**

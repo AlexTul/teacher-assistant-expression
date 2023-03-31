@@ -1,6 +1,5 @@
 package com.geeksforless.tuleninov.assistantweb.model.user;
 
-
 import com.geeksforless.tuleninov.assistantweb.data.user.UserUIResponse;
 import com.geeksforless.tuleninov.assistantweb.model.role.RoleUI;
 
@@ -28,22 +27,14 @@ public class UserUI {
     private List<RoleUI> roles;
 
 
-    public UserUI(int id, String firstName, String lastName, String email, String password, List<RoleUI> roles) {
+    public UserUI(int id, String firstName, String lastName,
+                  String email, String password, List<RoleUI> roles) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.roles = roles;
-    }
-
-    public UserUI(UserUI userUI) {
-        this.id = userUI.getId();
-        this.firstName = userUI.getFirstName();
-        this.lastName = userUI.getLastName();
-        this.email = userUI.getEmail();
-        this.password = userUI.getPassword();
-        this.roles = userUI.roles;
     }
 
     public int getId() {

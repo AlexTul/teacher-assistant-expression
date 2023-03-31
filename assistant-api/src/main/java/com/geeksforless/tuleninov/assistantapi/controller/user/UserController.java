@@ -36,9 +36,9 @@ public class UserController {
     /**
      * Create the user in the database.
      *
-     * @param request       request with user parameters
-     * @param ucb           builder for UriComponents
-     * @return              the user from database in response format
+     * @param request request with user parameters
+     * @param ucb     builder for UriComponents
+     * @return the user from database in response format
      */
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = URL_REGISTER, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -52,8 +52,8 @@ public class UserController {
     /**
      * Get all users from database in response format with ROLE_USER and pagination information.
      *
-     * @param pageable      abstract interface for pagination information
-     * @return              all users from database in response format
+     * @param pageable abstract interface for pagination information
+     * @return all users from database in response format
      */
     @GetMapping(value = URL_ADMIN + URL_USER, produces = MediaType.APPLICATION_JSON_VALUE)
     @PageableAsQueryParam
@@ -64,8 +64,8 @@ public class UserController {
     /**
      * Get the user by email from the database in response format.
      *
-     * @param email         email of user
-     * @return              the user from database in response format
+     * @param email email of user
+     * @return the user from database in response format
      */
     @GetMapping(value = URL_ADMIN + URL_USER + "/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
     public UserResponse getCurrentUser(@PathVariable String email) {
@@ -76,8 +76,8 @@ public class UserController {
     /**
      * Get the user by id from the database in response format.
      *
-     * @param id            id of user
-     * @return              the user from database in response format
+     * @param id id of user
+     * @return the user from database in response format
      */
     @GetMapping(value = URL_USER + "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public UserResponse getUserById(@PathVariable int id) {
@@ -88,8 +88,8 @@ public class UserController {
     /**
      * Exists user by email in the database in boolean format.
      *
-     * @param email         email of user
-     * @return              true - if user exists in database and false - is user does not exist in database
+     * @param email email of user
+     * @return true - if user exists in database and false - is user does not exist in database
      */
     @GetMapping(value = URL_REGISTER + "/{email}")
     public boolean existsByEmail(@PathVariable String email) {
@@ -99,8 +99,8 @@ public class UserController {
     /**
      * Update the user in the database.
      *
-     * @param id            id of goods
-     * @param request       request with user parameters
+     * @param id      id of goods
+     * @param request request with user parameters
      */
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping(value = URL_REGISTER + URL_USER + "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -123,7 +123,7 @@ public class UserController {
     /**
      * Delete the user in the database.
      *
-     * @param email         email of user
+     * @param email email of user
      */
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping(value = URL_ADMIN + URL_USER + "/{email}")

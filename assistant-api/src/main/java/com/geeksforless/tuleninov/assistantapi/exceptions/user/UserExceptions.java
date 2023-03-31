@@ -18,7 +18,7 @@ public class UserExceptions {
      * @return              specific HTTP response status codes
      */
     public static ResponseStatusException userNotFound(int userId) {
-        return new ResponseStatusException(HttpStatus.NOT_FOUND, "User with id " + userId + " was not found");
+        return new ResponseStatusException(HttpStatus.NOT_FOUND, "User with id '" + userId + "' was not found");
     }
 
     /**
@@ -28,7 +28,7 @@ public class UserExceptions {
      * @return              specific HTTP response status codes
      */
     public static ResponseStatusException userNotFound(String email) {
-        return new ResponseStatusException(HttpStatus.NOT_FOUND, "User with email " + email + " was not found");
+        return new ResponseStatusException(HttpStatus.NOT_FOUND, "User with email '" + email + "' was not found");
     }
 
     /**
@@ -38,6 +38,6 @@ public class UserExceptions {
      * @return              specific HTTP response status codes
      */
     public static ResponseStatusException duplicateEmail(String email) {
-        return new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email " + email + " already taken");
+        return new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email '" + email + "' already taken");
     }
 }
