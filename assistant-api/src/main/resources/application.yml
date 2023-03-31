@@ -1,4 +1,10 @@
 spring:
+  profiles:
+    active: dev
+    group:
+      dev:
+        - local-dev
+        - debug
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://${DB_HOST:localhost}:5432/assistant
