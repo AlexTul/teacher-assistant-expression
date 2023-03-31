@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import static com.geeksforless.tuleninov.assistantlib.Routes.URL_ADMIN;
+import static com.geeksforless.tuleninov.assistantweb.RoutesWeb.URL_ADMIN;
 
 /**
  * Controller for the admin page.

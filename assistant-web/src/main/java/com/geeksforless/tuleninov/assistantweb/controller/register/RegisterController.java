@@ -1,6 +1,6 @@
 package com.geeksforless.tuleninov.assistantweb.controller.register;
 
-import com.geeksforless.tuleninov.assistantlib.data.user.SaveUserRequest;
+import com.geeksforless.tuleninov.assistantweb.data.user.SaveUserUIRequest;
 import com.geeksforless.tuleninov.assistantweb.service.crud.user.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import static com.geeksforless.tuleninov.assistantlib.Routes.*;
+import static com.geeksforless.tuleninov.assistantweb.RoutesWeb.*;
 import static com.geeksforless.tuleninov.assistantweb.Constants.SCOPE_MESSAGE;
 
 /**
@@ -47,7 +47,7 @@ public class RegisterController {
      * @return redirect on success message page
      */
     @PostMapping()
-    public String registerPost(@Valid SaveUserRequest request,
+    public String registerPost(@Valid SaveUserUIRequest request,
                                HttpServletRequest httpRequest) {
         boolean register = userService.register(request);
 
@@ -70,7 +70,7 @@ public class RegisterController {
      */
     @PutMapping(value = "/{id}")
     public String updatePut(@PathVariable(value = "id") int id,
-                            @Valid SaveUserRequest request) {
+                            @Valid SaveUserUIRequest request) {
         userService.update(id, request);
         log.info("User '" + request.email() + " updated.");
 

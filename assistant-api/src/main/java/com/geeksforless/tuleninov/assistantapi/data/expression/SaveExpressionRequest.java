@@ -1,9 +1,8 @@
-package com.geeksforless.tuleninov.assistantlib.data.expression;
+package com.geeksforless.tuleninov.assistantapi.data.expression;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.math.BigDecimal;
 
 /**
  * Record for the Expression request.

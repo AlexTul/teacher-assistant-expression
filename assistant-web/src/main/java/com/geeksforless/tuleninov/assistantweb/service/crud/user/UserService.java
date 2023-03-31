@@ -1,7 +1,7 @@
 package com.geeksforless.tuleninov.assistantweb.service.crud.user;
 
-import com.geeksforless.tuleninov.assistantlib.data.user.SaveUserRequest;
 import com.geeksforless.tuleninov.assistantweb.data.user.OverrideUserPasswordRequest;
+import com.geeksforless.tuleninov.assistantweb.data.user.SaveUserUIRequest;
 import com.geeksforless.tuleninov.assistantweb.data.user.UserUIResponse;
 import com.geeksforless.tuleninov.assistantweb.feignclient.UserServiceFeignClient;
 import com.geeksforless.tuleninov.assistantweb.model.user.UserUI;
@@ -33,7 +33,7 @@ public class UserService {
      * @param request request with user parameters
      * @return true if successful registration
      */
-    public boolean register(SaveUserRequest request) {
+    public boolean register(SaveUserUIRequest request) {
         if (userServiceFeignClient.existsByEmail(request.email())) {
             return false;
         }
@@ -78,7 +78,7 @@ public class UserService {
      * @param id      id of goods
      * @param request request with user parameters
      */
-    public void update(int id, SaveUserRequest request) {
+    public void update(int id, SaveUserUIRequest request) {
         var userEmail = userServiceFeignClient.getUserById(id).email();
 
         userServiceFeignClient.update(id, request);

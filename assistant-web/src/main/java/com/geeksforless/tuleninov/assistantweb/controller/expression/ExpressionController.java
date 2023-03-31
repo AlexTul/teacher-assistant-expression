@@ -1,7 +1,7 @@
 package com.geeksforless.tuleninov.assistantweb.controller.expression;
 
-import com.geeksforless.tuleninov.assistantlib.data.expression.SaveExpressionRequest;
 import com.geeksforless.tuleninov.assistantweb.controller.Authenticator;
+import com.geeksforless.tuleninov.assistantweb.data.expression.SaveExpressionUIRequest;
 import com.geeksforless.tuleninov.assistantweb.model.role.RoleType;
 import com.geeksforless.tuleninov.assistantweb.service.calculator.Calculable;
 import com.geeksforless.tuleninov.assistantweb.service.calculator.Calculator;
@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.math.BigDecimal;
 
-import static com.geeksforless.tuleninov.assistantlib.Routes.*;
+import static com.geeksforless.tuleninov.assistantweb.RoutesWeb.*;
 import static com.geeksforless.tuleninov.assistantweb.Constants.SCOPE_MESSAGE;
 
 /**
@@ -61,7 +61,7 @@ public class ExpressionController {
      * @return expression page
      */
     @PostMapping()
-    public String createExpressionPost(@Valid SaveExpressionRequest request,
+    public String createExpressionPost(@Valid SaveExpressionUIRequest request,
                                        Model model, HttpServletRequest httpRequest) {
         if (processValid(request, model)) {
             boolean created = expressionService.create(request);
@@ -108,7 +108,7 @@ public class ExpressionController {
      * @param model      holder for model attributes
      * @return true - if expression is validated
      */
-    private boolean processValid(SaveExpressionRequest request, Model model) {
+    private boolean processValid(SaveExpressionUIRequest request, Model model) {
         Validable valid = new ExpressionValidationService();
         Calculable calculable = new Calculator();
         var expression = request.expression();

@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static com.geeksforless.tuleninov.assistantlib.Routes.URL_MESSAGE;
 import static com.geeksforless.tuleninov.assistantweb.Constants.SCOPE_MESSAGE;
+import static com.geeksforless.tuleninov.assistantweb.RoutesWeb.URL_MESSAGE;
 
 /**
  * Controller for the message page.

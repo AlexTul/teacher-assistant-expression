@@ -1,6 +1,6 @@
 package com.geeksforless.tuleninov.assistantweb.feignclient;
 
-import com.geeksforless.tuleninov.assistantlib.data.user.SaveUserRequest;
+import com.geeksforless.tuleninov.assistantweb.data.user.SaveUserUIRequest;
 import com.geeksforless.tuleninov.assistantweb.data.user.UserUIResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.domain.Page;
@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import static com.geeksforless.tuleninov.assistantlib.Routes.*;
+import static com.geeksforless.tuleninov.assistantweb.RoutesWeb.*;
 
 /**
  * Feign Client for the User.
@@ -26,7 +26,7 @@ public interface UserServiceFeignClient {
      * @return the user from database in response format
      */
     @PostMapping(value = URL_REGISTER, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    UserUIResponse register(@RequestBody SaveUserRequest request);
+    UserUIResponse register(@RequestBody SaveUserUIRequest request);
 
     /**
      * Get all users from database in response format with pagination information.
@@ -71,7 +71,7 @@ public interface UserServiceFeignClient {
      * @param request request with user parameters
      */
     @PutMapping(value = URL_REGISTER + URL_USER + "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    void update(@PathVariable int id, @RequestBody SaveUserRequest request);
+    void update(@PathVariable int id, @RequestBody SaveUserUIRequest request);
 
     /**
      * Change user`s password by email int the database.

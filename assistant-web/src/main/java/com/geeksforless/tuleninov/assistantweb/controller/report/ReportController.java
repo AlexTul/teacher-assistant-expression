@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static com.geeksforless.tuleninov.assistantlib.Routes.URL_REPORT;
+import static com.geeksforless.tuleninov.assistantweb.RoutesWeb.URL_REPORT;
 import static com.geeksforless.tuleninov.assistantweb.Constants.SCOPE_EXPRESSIONS;
 
 @Controller

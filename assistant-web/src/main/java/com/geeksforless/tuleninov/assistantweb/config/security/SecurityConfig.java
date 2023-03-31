@@ -11,9 +11,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import static com.geeksforless.tuleninov.assistantlib.Routes.*;
 import static com.geeksforless.tuleninov.assistantweb.Constants.SCOPE_EMAIL;
 import static com.geeksforless.tuleninov.assistantweb.Constants.SCOPE_PASSWORD;
+import static com.geeksforless.tuleninov.assistantweb.RoutesWeb.*;
 
 /**
  * Override some of Spring's built-in security protocols to use our database and hashing algorithm.

@@ -1,6 +1,6 @@
 package com.geeksforless.tuleninov.assistantweb.service.crud.user;
 
-import com.geeksforless.tuleninov.assistantlib.data.user.SaveUserRequest;
+import com.geeksforless.tuleninov.assistantweb.data.user.SaveUserUIRequest;
 
 /**
  * Service class for making message.
@@ -16,7 +16,7 @@ public class UserServiceMessagesMaker {
      * @param request request with user parameters
      * @return message about successful registration
      */
-    public static String makeWelcomeMessage(SaveUserRequest request) {
+    public static String makeWelcomeMessage(SaveUserUIRequest request) {
         return String.format(
                 """
                         Dear %s,
@@ -35,7 +35,7 @@ public class UserServiceMessagesMaker {
      * @param request request with user parameters
      * @return message about updating user`s credential
      */
-    public static String makeUpdateMessage(SaveUserRequest request) {
+    public static String makeUpdateMessage(SaveUserUIRequest request) {
         return String.format(
                 """
                         Dear user,

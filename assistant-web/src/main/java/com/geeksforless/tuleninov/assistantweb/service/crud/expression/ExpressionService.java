@@ -1,7 +1,7 @@
 package com.geeksforless.tuleninov.assistantweb.service.crud.expression;
 
-import com.geeksforless.tuleninov.assistantlib.data.expression.SaveExpressionRequest;
 import com.geeksforless.tuleninov.assistantweb.data.expression.ExpressionUIResponse;
+import com.geeksforless.tuleninov.assistantweb.data.expression.SaveExpressionUIRequest;
 import com.geeksforless.tuleninov.assistantweb.feignclient.ExpressionServiceFeignClient;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,7 +28,7 @@ public class ExpressionService {
      * @param request request with expression parameters
      * @return true - if expression created in the database
      */
-    public boolean create(SaveExpressionRequest request) {
+    public boolean create(SaveExpressionUIRequest request) {
         if (expressionServiceFeignClient.existsByExpression(request.expression())) {
             return false;
         }

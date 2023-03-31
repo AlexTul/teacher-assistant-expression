@@ -4,7 +4,7 @@ import com.geeksforless.tuleninov.assistantapi.data.expression.ExpressionRespons
 import com.geeksforless.tuleninov.assistantapi.exceptions.expression.ExpressionExceptions;
 import com.geeksforless.tuleninov.assistantapi.model.expression.Expression;
 import com.geeksforless.tuleninov.assistantapi.repository.ExpressionRepository;
-import com.geeksforless.tuleninov.assistantlib.data.expression.SaveExpressionRequest;
+import com.geeksforless.tuleninov.assistantapi.data.expression.SaveExpressionRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

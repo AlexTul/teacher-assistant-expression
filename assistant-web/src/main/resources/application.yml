@@ -14,8 +14,10 @@ spring:
     show-sql: true
   mail:
     host: smtp.gmail.com
-    username: ${SPRING_MAIL_USERNAME}
-    password: ${SPRING_MAIL_PASSWORD}
+#    username: ${SPRING_MAIL_USERNAME}
+#    password: ${SPRING_MAIL_PASSWORD}
+    username: talextu@gmail.com
+    password: vwzkzyyzitdvrsoz
     port: 465
     protocol: smtps
 

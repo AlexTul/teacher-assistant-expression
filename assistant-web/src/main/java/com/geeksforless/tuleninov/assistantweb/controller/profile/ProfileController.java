@@ -8,8 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import static com.geeksforless.tuleninov.assistantlib.Routes.URL_PROFILE;
 import static com.geeksforless.tuleninov.assistantweb.Constants.*;
+import static com.geeksforless.tuleninov.assistantweb.RoutesWeb.URL_PROFILE;
 
 /**
  * Controller for the profile page.

@@ -6,9 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 
-import static com.geeksforless.tuleninov.assistantlib.Routes.URL_INDEX;
-import static com.geeksforless.tuleninov.assistantlib.Routes.URL_LOGIN;
 import static com.geeksforless.tuleninov.assistantweb.Constants.SCOPE_MESSAGE;
+import static com.geeksforless.tuleninov.assistantweb.RoutesWeb.URL_INDEX;
 
 /**
  * Controller for the email page.

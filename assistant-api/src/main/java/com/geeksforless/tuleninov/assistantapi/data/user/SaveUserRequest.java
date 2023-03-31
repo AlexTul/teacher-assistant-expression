@@ -1,4 +1,4 @@
-package com.geeksforless.tuleninov.assistantlib.data.user;
+package com.geeksforless.tuleninov.assistantapi.data.user;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

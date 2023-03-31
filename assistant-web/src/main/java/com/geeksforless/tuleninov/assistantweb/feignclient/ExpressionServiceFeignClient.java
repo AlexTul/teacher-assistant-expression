@@ -1,15 +1,15 @@
 package com.geeksforless.tuleninov.assistantweb.feignclient;
 
-import com.geeksforless.tuleninov.assistantlib.data.expression.SaveExpressionRequest;
 import com.geeksforless.tuleninov.assistantweb.data.expression.ExpressionUIResponse;
+import com.geeksforless.tuleninov.assistantweb.data.expression.SaveExpressionUIRequest;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import static com.geeksforless.tuleninov.assistantlib.Routes.URL_EXPRESSION;
-import static com.geeksforless.tuleninov.assistantlib.Routes.URL_ROOT;
+import static com.geeksforless.tuleninov.assistantweb.RoutesWeb.URL_EXPRESSION;
+import static com.geeksforless.tuleninov.assistantweb.RoutesWeb.URL_ROOT;
 
 /**
  * Feign Client for the Expression.
@@ -27,7 +27,7 @@ public interface ExpressionServiceFeignClient {
      * @return true if created successfully
      */
     @PostMapping(value = URL_EXPRESSION, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    ExpressionUIResponse create(@RequestBody SaveExpressionRequest request);
+    ExpressionUIResponse create(@RequestBody SaveExpressionUIRequest request);
 
     /**
      * Get all expressions from database in response format with pagination information.

@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import static com.geeksforless.tuleninov.assistantlib.Routes.URL_ADMIN;
-import static com.geeksforless.tuleninov.assistantlib.Routes.URL_USER;
+import static com.geeksforless.tuleninov.assistantweb.RoutesWeb.*;
 import static com.geeksforless.tuleninov.assistantweb.Constants.*;
 
 /**

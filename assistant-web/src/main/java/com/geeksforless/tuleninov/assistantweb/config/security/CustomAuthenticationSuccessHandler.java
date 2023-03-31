@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Set;
 
-import static com.geeksforless.tuleninov.assistantlib.Routes.*;
+import static com.geeksforless.tuleninov.assistantweb.RoutesWeb.*;
 
 @Configuration
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {

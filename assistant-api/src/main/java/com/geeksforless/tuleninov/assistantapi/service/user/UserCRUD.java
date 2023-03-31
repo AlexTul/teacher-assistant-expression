@@ -1,7 +1,7 @@
 package com.geeksforless.tuleninov.assistantapi.service.user;
 
+import com.geeksforless.tuleninov.assistantapi.data.user.SaveUserRequest;
 import com.geeksforless.tuleninov.assistantapi.data.user.UserResponse;
-import com.geeksforless.tuleninov.assistantlib.data.user.SaveUserRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

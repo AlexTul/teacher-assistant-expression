@@ -2,6 +2,33 @@ version: '3'
 
 services:
 
+  assistant-web:
+    image: assistant-web:0.0.1-SNAPSHOT
+    build:
+      context: ./assistant-web
+    container_name: assistant_web_service
+    environment:
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+      SPRING_MAIL_USERNAME: ${SPRING_MAIL_USERNAME}
+      SPRING_MAIL_PASSWORD: ${SPRING_MAIL_PASSWORD}
+    ports:
+      - "8081:8081"
+
+  assistant-api-service:
+    image: assistant-api-service:0.0.1-SNAPSHOT
+    build:
+      context: ./assistant-api
+    container_name: assistant_api_service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/assistant
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+
   db:
     image: postgres:latest
     container_name: assistant_db

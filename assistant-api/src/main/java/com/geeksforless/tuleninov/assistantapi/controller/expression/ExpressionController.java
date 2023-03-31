@@ -2,7 +2,7 @@ package com.geeksforless.tuleninov.assistantapi.controller.expression;
 
 import com.geeksforless.tuleninov.assistantapi.data.expression.ExpressionResponse;
 import com.geeksforless.tuleninov.assistantapi.service.expression.ExpressionCRUD;
-import com.geeksforless.tuleninov.assistantlib.data.expression.SaveExpressionRequest;
+import com.geeksforless.tuleninov.assistantapi.data.expression.SaveExpressionRequest;
 import io.swagger.v3.oas.annotations.Parameter;
 import org.springdoc.core.converters.models.PageableAsQueryParam;
 import org.springframework.data.domain.Page;
@@ -15,8 +15,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 
-import static com.geeksforless.tuleninov.assistantlib.Routes.URL_EXPRESSION;
-import static com.geeksforless.tuleninov.assistantlib.Routes.URL_ROOT;
+import static com.geeksforless.tuleninov.assistantapi.RoutesAPI.*;
 
 /**
  * Rest controller for the Expression.

@@ -1,11 +1,11 @@
-package com.geeksforless.tuleninov.assistantlib;
+package com.geeksforless.tuleninov.assistantweb;
 
 /**
  * The class contains the routes for application.
  */
-public final class Routes {
+public final class RoutesWeb {
 
-    public Routes() {
+    public RoutesWeb() {
         throw new AssertionError("non-instantiable class");
     }
 
@@ -22,6 +22,4 @@ public final class Routes {
     public static final String URL_EXPRESSION = "/expression";
     public static final String URL_MENU = "/menu";
     public static final String URL_ROOT = "/root";
-
-
 }

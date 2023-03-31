@@ -2,7 +2,7 @@ package com.geeksforless.tuleninov.assistantapi.controller.user;
 
 import com.geeksforless.tuleninov.assistantapi.data.user.UserResponse;
 import com.geeksforless.tuleninov.assistantapi.service.user.UserCRUD;
-import com.geeksforless.tuleninov.assistantlib.data.user.SaveUserRequest;
+import com.geeksforless.tuleninov.assistantapi.data.user.SaveUserRequest;
 import io.swagger.v3.oas.annotations.Parameter;
 import org.springdoc.core.converters.models.PageableAsQueryParam;
 import org.springframework.data.domain.Page;
@@ -16,7 +16,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.validation.Valid;
 
 import static com.geeksforless.tuleninov.assistantapi.exceptions.user.UserExceptions.userNotFound;
-import static com.geeksforless.tuleninov.assistantlib.Routes.*;
+import static com.geeksforless.tuleninov.assistantapi.RoutesAPI.*;
 
 /**
  * Rest controller for the User.

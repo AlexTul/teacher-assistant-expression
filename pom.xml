@@ -15,7 +15,6 @@
 
     <modules>
         <module>assistant-api</module>
-        <module>assistant-lib</module>
         <module>assistant-web</module>
     </modules>
 

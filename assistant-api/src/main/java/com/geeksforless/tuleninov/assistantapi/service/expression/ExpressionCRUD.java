@@ -1,7 +1,7 @@
 package com.geeksforless.tuleninov.assistantapi.service.expression;
 
 import com.geeksforless.tuleninov.assistantapi.data.expression.ExpressionResponse;
-import com.geeksforless.tuleninov.assistantlib.data.expression.SaveExpressionRequest;
+import com.geeksforless.tuleninov.assistantapi.data.expression.SaveExpressionRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
