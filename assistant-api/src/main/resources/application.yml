@@ -8,10 +8,8 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://${DB_HOST:localhost}:5432/assistant
-#    username: ${SPRING_DATASOURCE_USERNAME}
-#    password: ${SPRING_DATASOURCE_PASSWORD}
-    username: postgres
-    password: admin
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
   jpa:
     open-in-view: false
 
